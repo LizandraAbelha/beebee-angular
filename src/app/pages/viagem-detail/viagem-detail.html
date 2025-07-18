@@ -1,0 +1,70 @@
+@if (viagem) {
+  <div class="card">
+    <div class="card-header">
+      <h2>Detalhes da Viagem</h2>
+    </div>
+    <div class="card-body">
+      <h4 class="card-title">{{ viagem.origem }} → {{ viagem.destino }}</h4>
+      <p class="card-text">{{ viagem.descricao }}</p>
+
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>Data:</strong> {{ viagem.dataInicio | date:'full' }}</li>
+        <li class="list-group-item"><strong>Situação:</strong> <span class="badge bg-info">{{ viagem.situacao }}</span></li>
+        <li class="list-group-item"><strong>Motorista:</strong> {{ viagem.motoristaNome }}</li>
+      </ul>
+    </div>
+
+    <div class="card-footer">
+      @if (isMotorista) {
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5>Pedidos de Participação</h5>
+          @if(pedidos.length > 0) {
+            <ul class="list-group">
+              @for(pedido of pedidos; track pedido.id) {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                  <span>
+                    Caronista: <strong>{{ pedido.alunoNome }}</strong> - Status: <strong>{{ pedido.situacao }}</strong>
+                  </span>
+                  @if(pedido.situacao === 'SOLICITADA') {
+                    <div>
+                      <button (click)="gerirPedido(pedido, 'CONFIRMADA')" class="btn btn-sm btn-success">Aprovar</button>
+                      <button (click)="gerirPedido(pedido, 'CANCELADA')" class="btn btn-sm btn-danger ms-2">Recusar</button>
+                    </div>
+                  }
+                  @if(pedido.situacao === 'CONFIRMADA') {
+                    <button (click)="finalizarViagem(pedido)" class="btn btn-sm btn-info">Finalizar</button>
+                  }
+                  @if(viagem.situacao === 'PLANEJADA') {
+                    <button (click)="encerrarViagem()" class="btn btn-warning btn-sm">Encerrar Viagem</button>
+                  }
+                </li>
+              }
+            </ul>
+          } @else {
+            <p class="text-muted">Nenhum pedido de participação para esta viagem ainda.</p>
+          }
+        </div>
+      } @else {
+        @if (minhaSolicitacao) {
+          <div class="alert" [ngClass]="{
+            'alert-warning': minhaSolicitacao.situacao === 'SOLICITADA',
+            'alert-success': minhaSolicitacao.situacao === 'CONFIRMADA',
+            'alert-info': minhaSolicitacao.situacao === 'FINALIZADA',
+            'alert-danger': minhaSolicitacao.situacao === 'CANCELADA'
+          }">
+            <p class="mb-0"><strong>Status da sua solicitação:</strong> {{ minhaSolicitacao.situacao }}</p>
+          </div>
+        } @else if (viagem.situacao === 'PLANEJADA') {
+          <button (click)="solicitarParticipacao()" class="btn btn-success">Solicitar Participação</button>
+          } @else {
+            <div class="alert alert-warning">
+              <p class="mb-0">Esta viagem não está mais a aceitar pedidos de participação.</p>
+            </div>
+          }
+        }
+      <a routerLink="/app/viagens" class="btn btn-secondary ms-2">Voltar para a Lista</a>
+    </div>
+    </div>
+} @else {
+  <p>A carregar detalhes da viagem...</p>
+}

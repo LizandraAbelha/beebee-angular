@@ -1,0 +1,18 @@
+<h2>Cadastrar Novo Veículo</h2>
+<hr>
+
+<form (ngSubmit)="salvarVeiculo()">
+  <div class="mb-3">
+    <label for="placa" class="form-label">Placa</label>
+    <input type="text" class="form-control" id="placa" name="placa" [(ngModel)]="veiculo.placa" required>
+  </div>
+  <div class="mb-3">
+    <label for="modelo" class="form-label">Modelo</label>
+    <input type="text" class="form-control" id="modelo" name="modelo" [(ngModel)]="veiculo.modelo" required>
+  </div>
+  <div class="mb-3">
+    <label for="cor" class="form-label">Cor</label>
+    <input type="text" class="form-control" id="cor" name="cor" [(ngModel)]="veiculo.cor" required>
+  </div>
+  <button type="submit" class="btn btn-primary">Salvar</button>
+</form>

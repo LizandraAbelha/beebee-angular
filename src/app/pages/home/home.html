@@ -1,0 +1,47 @@
+<div class="text-center">
+    <h2>Painel Principal</h2>
+    <p class="lead">O que você gostaria de fazer hoje?</p>
+</div>
+
+<div class="row mt-5 text-center">
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Procurar Carona</h5>
+                <p class="card-text">Veja a lista de caronas disponíveis para o seu trajeto.</p>
+                <a routerLink="/app/viagens" class="btn btn-primary mt-auto">Ver Caronas</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Meus Veículos</h5>
+                <p class="card-text">Cadastre e gira os seus veículos para oferecer caronas.</p>
+                <a routerLink="/app/veiculos" class="btn btn-secondary mt-auto">Gerir Veículos</a>
+            </div>
+        </div>
+    </div>
+
+    @if (possuiVeiculos) {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">Oferecer Carona</h5>
+                    <p class="card-text">Crie uma nova viagem e partilhe os seus lugares disponíveis.</p>
+                    <a routerLink="/app/viagens/nova" class="btn btn-success mt-auto">Criar Nova Viagem</a>
+                </div>
+            </div>
+        </div>
+    }
+
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+                <h5 class="card-title">Meu Histórico</h5>
+                <p class="card-text">Veja o seu histórico de caronas e avaliações.</p>
+                <a href="#" class="btn btn-info mt-auto">Ver Histórico</a>
+            </div>
+        </div>
+    </div>
+</div>

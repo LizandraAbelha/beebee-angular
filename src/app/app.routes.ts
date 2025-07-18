@@ -1,3 +1,36 @@
 import { Routes } from '@angular/router';
+import { Login } from './pages/login/login';
+import { CadastroUsuario } from './pages/cadastro-usuario/cadastro-usuario';
+import { Home } from './pages/home/home';
+import { MainLayout } from './layouts/main-layout/main-layout';
+import { VeiculoList } from './pages/veiculo-list/veiculo-list';
+import { VeiculoForm } from './pages/veiculo-form/veiculo-form';
+import { ViagemForm } from './pages/viagem-form/viagem-form';
+import { ViagemList } from './pages/viagem-list/viagem-list';
+import { ViagemDetail } from './pages/viagem-detail/viagem-detail';
+import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
 
-export const routes: Routes = [];
+
+export const routes: Routes = [
+    { path: '', redirectTo: '/login', pathMatch: 'full' },
+    { path: 'login', component: Login },
+    { path: 'cadastro', component: CadastroUsuario },
+    {
+    path: 'app',
+    component: MainLayout,
+    children: [
+      { path: 'home', component: Home },
+
+      { path: 'veiculos', component: VeiculoList },
+
+      { path: 'veiculos/form', component: VeiculoForm },
+      { path: 'veiculos/form/:id', component: VeiculoForm },
+      { path: 'viagens', component: ViagemList },
+      { path: 'viagens/nova', component: ViagemForm },
+      { path: 'viagens/:id', component: ViagemDetail },
+      { path: 'minhas-viagens', component: MinhasViagens },
+
+      { path: '', redirectTo: 'home', pathMatch: 'full' }
+    ]
+  },
+];

@@ -1,0 +1,20 @@
+<h2 class="mb-4">Caronas Disponíveis</h2>
+
+@if (viagens.length > 0) {
+  <div class="list-group">
+    @for (viagem of viagens; track viagem.id) {
+      <a [routerLink]="['/app/viagens', viagem.id]" class="list-group-item list-group-item-action">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{ viagem.origem }} → {{ viagem.destino }}</h5>
+          <small>Data: {{ viagem.dataInicio | date:'dd/MM/yyyy' }}</small>
+        </div>
+        <p class="mb-1">{{ viagem.descricao }}</p>
+        <small>Situação: {{ viagem.situacao }}</small>
+      </a>
+    }
+  </div>
+} @else {
+  <div class="alert alert-secondary">
+    Nenhuma carona disponível no momento.
+  </div>
+}
