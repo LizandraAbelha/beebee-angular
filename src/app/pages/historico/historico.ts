@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ViagemAluno } from '../../models/viagem-aluno';
+import { Viagem } from '../../models/viagem';
 import { ViagemAlunoService } from '../../services/viagem-aluno';
+import { ViagemService } from '../../services/viagem';
+import { VeiculoService } from '../../services/veiculo';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -12,27 +15,53 @@ import { RouterLink } from '@angular/router';
   styleUrl: './historico.css'
 })
 export class Historico implements OnInit {
-  viagensFinalizadas: ViagemAluno[] = [];
+  historicoMotorista: Viagem[] = [];
+  historicoPassageiro: ViagemAluno[] = [];
   alunoLogadoId: number = 0;
+  isMotorista: boolean = false;
 
-  constructor(private viagemAlunoService: ViagemAlunoService) {}
+  constructor(
+    private viagemService: ViagemService,
+    private viagemAlunoService: ViagemAlunoService,
+    private veiculoService: VeiculoService
+  ) {}
 
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
     if (this.alunoLogadoId) {
-      this.carregarHistorico();
+      this.verificarSeEhMotorista();
+      this.carregarHistoricoPassageiro();
     }
   }
 
-  carregarHistorico(): void {
+  verificarSeEhMotorista(): void {
+    this.veiculoService.getVeiculosPorMotorista(this.alunoLogadoId).subscribe(veiculos => {
+      this.isMotorista = veiculos.length > 0;
+      if (this.isMotorista) {
+        this.carregarHistoricoMotorista();
+      }
+    });
+  }
+
+  carregarHistoricoMotorista(): void {
+    this.viagemService.getHistoricoByMotoristaId(this.alunoLogadoId).subscribe(data => {
+      this.historicoMotorista = data;
+    });
+  }
+
+  carregarHistoricoPassageiro(): void {
     this.viagemAlunoService.getByAlunoId(this.alunoLogadoId).subscribe(data => {
-      this.viagensFinalizadas = data.filter(
-        v => v.situacao === 'FINALIZADA' || v.situacao === 'CANCELADA'
-      );
+      this.historicoPassageiro = data.filter(item => {
+        const viagemPrincipalTerminou = item.viagem.situacao === 'FINALIZADA' || item.viagem.situacao === 'CANCELADA';
+
+        const suaParticipacaoTerminou = item.situacao === 'FINALIZADA' || item.situacao === 'CANCELADA';
+
+        return viagemPrincipalTerminou || suaParticipacaoTerminou;
+      });
     });
   }
 
   avaliar(viagemAluno: ViagemAluno): void {
-    alert(`Avaliar viagem com ${viagemAluno.viagem.motoristaNome}`);
+    alert(`Redirecionando para avaliar a viagem com ${viagemAluno.viagem.motoristaNome}`);
   }
 }
