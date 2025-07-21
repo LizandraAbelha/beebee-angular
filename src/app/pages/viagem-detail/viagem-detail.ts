@@ -13,7 +13,6 @@ import { ViagemAluno } from '../../models/viagem-aluno';
   templateUrl: './viagem-detail.html',
   styleUrl: './viagem-detail.css'
 })
-
 export class ViagemDetail implements OnInit {
   viagem: Viagem | null = null;
   alunoLogadoId: number = 0;
@@ -30,9 +29,10 @@ export class ViagemDetail implements OnInit {
 
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
-    const viagemIdString = this.route.snapshot.paramMap.get('id');
-    if (viagemIdString) {
-      this.carregarDetalhesViagem(Number(viagemIdString));
+    const viagemId = this.route.snapshot.paramMap.get('id');
+    if (viagemId) {
+      this.carregarDetalhesViagem(Number(viagemId));
+      this.carregarPedidos(Number(viagemId));
     }
   }
 
@@ -40,7 +40,6 @@ export class ViagemDetail implements OnInit {
     this.viagemService.getById(id).subscribe(data => {
       this.viagem = data;
       this.isMotorista = this.alunoLogadoId === this.viagem.motoristaId;
-      this.carregarPedidos(id);
     });
   }
 
@@ -50,6 +49,50 @@ export class ViagemDetail implements OnInit {
       this.minhaSolicitacao = this.pedidos.find(p => p.alunoId === this.alunoLogadoId);
     });
   }
+
+  iniciarViagem(): void {
+    if (!this.viagem || !this.viagem.id) return;
+
+    const viagemParaAtualizar: Viagem = {
+      ...this.viagem,
+      situacao: 'EM_ANDAMENTO'
+    };
+
+    this.viagemService.update(this.viagem.id, viagemParaAtualizar).subscribe({
+      next: (viagemAtualizada) => {
+        this.viagem = viagemAtualizada;
+        alert('Viagem iniciada com sucesso!');
+      },
+      error: (err) => {
+        console.error('Erro ao iniciar a viagem:', err);
+        alert(`ERRO: Não foi possível iniciar a viagem. Motivo: ${err.error?.message || 'Erro desconhecido.'}`);
+      }
+    });
+  }
+
+  cancelarViagem(): void {
+    if (!this.viagem || !this.viagem.id) return;
+
+    if (confirm('Tem a certeza que deseja cancelar esta viagem? Esta ação não pode ser desfeita.')) {
+
+      const viagemParaAtualizar: Viagem = {
+        ...this.viagem,
+        situacao: 'CANCELADA'
+      };
+
+      this.viagemService.update(this.viagem.id, viagemParaAtualizar).subscribe({
+        next: () => {
+          alert('Viagem cancelada com sucesso.');
+          this.router.navigate(['/app/viagens']);
+        },
+        error: (err) => {
+          console.error('Erro ao cancelar a viagem:', err);
+          alert(`ERRO: Não foi possível cancelar a viagem. Motivo: ${err.error?.message || 'Erro desconhecido.'}`);
+        }
+      });
+    }
+  }
+
 
   gerirPedido(pedido: ViagemAluno, novoStatus: 'CONFIRMADA' | 'CANCELADA'): void {
     if (!this.viagem) return;
@@ -62,14 +105,12 @@ export class ViagemDetail implements OnInit {
 
   solicitarParticipacao(): void {
     if (!this.viagem) return;
-
     const novaSolicitacao: ViagemAluno = {
       dataSolicitacao: new Date().toISOString(),
       situacao: 'SOLICITADA',
       alunoId: this.alunoLogadoId,
       viagem: this.viagem
     };
-
     this.viagemAlunoService.solicitar(novaSolicitacao).subscribe({
       next: () => {
         alert('Participação solicitada com sucesso!');
@@ -101,17 +142,6 @@ export class ViagemDetail implements OnInit {
     this.viagemService.update(this.viagem.id!, viagemAtualizada).subscribe(viagemAtualizadaDoServidor => {
       this.viagem = viagemAtualizadaDoServidor;
       alert('Viagem encerrada com sucesso!');
-    });
-  }
-
-  cancelarViagem(): void {
-    if (!this.viagem || !confirm('Tem a certeza de que deseja cancelar esta viagem?')) {
-        return;
-    }
-    const viagemCancelada = { ...this.viagem, situacao: 'CANCELADA' };
-    this.viagemService.update(this.viagem.id!, viagemCancelada).subscribe(() => {
-        alert('Viagem cancelada com sucesso!');
-        this.router.navigate(['/app/minhas-viagens']);
     });
   }
 }
