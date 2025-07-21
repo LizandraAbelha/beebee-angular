@@ -6,10 +6,16 @@
       <a [routerLink]="['/app/viagens', viagem.id]" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
           <h5 class="mb-1">{{ viagem.origem }} → {{ viagem.destino }}</h5>
-          <small>Data: {{ viagem.dataInicio | date:'dd/MM/yyyy' }}</small>
+          <small>Data: {{ viagem.dataInicio | date:'dd/MM/yyyy HH:mm' }}</small>
+          <small class="text-muted">{{ viagem.motoristaNome }}</small>
+          <span class="badge" [ngClass]="{
+            'bg-primary': viagem.situacao === 'PLANEJADA',
+            'bg-info text-dark': viagem.situacao === 'EM_ANDAMENTO',
+          }">
+            {{ viagem.situacao }}
+          </span>
         </div>
         <p class="mb-1">{{ viagem.descricao }}</p>
-        <small>Situação: {{ viagem.situacao }}</small>
       </a>
     }
   </div>
