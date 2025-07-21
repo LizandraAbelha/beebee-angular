@@ -94,23 +94,36 @@ export class ViagemDetail implements OnInit {
   }
 
 
-  gerirPedido(pedido: ViagemAluno, novoStatus: 'CONFIRMADA' | 'CANCELADA'): void {
-    if (!this.viagem) return;
-    const pedidoAtualizado: ViagemAluno = { ...pedido, situacao: novoStatus };
-    this.viagemAlunoService.atualizarStatus(pedido.id!, pedidoAtualizado).subscribe(() => {
-      alert(`Pedido ${novoStatus === 'CONFIRMADA' ? 'aprovado' : 'recusado'} com sucesso!`);
-      this.carregarPedidos(this.viagem!.id!);
+  gerirPedido(pedido: ViagemAluno, novoStatus: 'CONFIRMADA' | 'RECUSADA' | 'FINALIZADA'): void {
+    if (!this.viagem || !pedido.id) return;
+
+    const pedidoAtualizado: ViagemAluno = {
+      ...pedido,
+      situacao: novoStatus
+    };
+
+    this.viagemAlunoService.atualizarStatus(pedido.id, pedidoAtualizado).subscribe({
+      next: () => {
+        let acao = novoStatus.toLowerCase().replace('ada', 'ado');
+        alert(`Pedido ${acao} com sucesso!`);
+        this.carregarPedidos(this.viagem!.id!);
+      },
+      error: (err) => {
+        console.error('Erro ao gerir pedido:', err);
+        alert(`ERRO: ${err.error || 'Não foi possível atualizar o pedido.'}`);
+      }
     });
   }
 
   solicitarParticipacao(): void {
     if (!this.viagem) return;
-    const novaSolicitacao: ViagemAluno = {
-      dataSolicitacao: new Date().toISOString(),
+
+    const novaSolicitacao: Partial<ViagemAluno> = {
       situacao: 'SOLICITADA',
       alunoId: this.alunoLogadoId,
       viagem: this.viagem
     };
+
     this.viagemAlunoService.solicitar(novaSolicitacao).subscribe({
       next: () => {
         alert('Participação solicitada com sucesso!');
@@ -123,7 +136,7 @@ export class ViagemDetail implements OnInit {
     });
   }
 
-  finalizarViagem(pedido: ViagemAluno): void {
+  finalizarCaronaPassageiro(pedido: ViagemAluno): void {
     if (!confirm('Tem a certeza de que deseja finalizar esta boleia para este passageiro?')) {
       return;
     }
@@ -131,6 +144,18 @@ export class ViagemDetail implements OnInit {
     this.viagemAlunoService.atualizarStatus(pedido.id!, pedidoFinalizado).subscribe(() => {
       alert('Boleia finalizada com sucesso!');
       this.carregarPedidos(this.viagem!.id!);
+    });
+  }
+
+  finalizarCaronaMotorista(): void {
+    if (!this.viagem || !confirm('Tem a certeza de que deseja finalizar esta viagem?')) {
+      return;
+    }
+    const viagemAtualizada = { ...this.viagem, situacao: 'FINALIZADA' };
+    this.viagemService.update(this.viagem.id!, viagemAtualizada).subscribe(viagemAtualizadaDoServidor => {
+      this.viagem = viagemAtualizadaDoServidor;
+      alert('Viagem finalizada com sucesso!');
+      this.router.navigate(['/app/viagens']);
     });
   }
 

@@ -1,10 +1,10 @@
-<h2>Cadastrar Novo Veículo</h2>
+<h2>{{ isEditMode ? 'Editar Veículo' : 'Cadastrar Novo Veículo' }}</h2>
 <hr>
 
 <form (ngSubmit)="salvarVeiculo()">
   <div class="mb-3">
     <label for="placa" class="form-label">Placa</label>
-    <input type="text" class="form-control" id="placa" name="placa" [(ngModel)]="veiculo.placa" required>
+    <input type="text" class="form-control" id="placa" name="placa" [(ngModel)]="veiculo.placa" required [disabled]="isEditMode">
   </div>
   <div class="mb-3">
     <label for="modelo" class="form-label">Modelo</label>
