@@ -8,7 +8,7 @@
       @for(viagem of viagensComoMotorista; track viagem.id) {
         <a [routerLink]="['/app/viagens', viagem.id]" class="list-group-item list-group-item-action">
           {{ viagem.origem }} → {{ viagem.destino }} em {{ viagem.dataInicio | date:'short' }}
-          <span class="badge bg-primary float-end">{{ viagem.situacao }}</span>
+          <span class="badge float-end" [ngClass]="{'bg-success': viagem.situacao === 'FINALIZADA', 'bg-warning': viagem.situacao === 'PLANEJADA', 'bg-danger': viagem.situacao === 'CANCELADA'}">{{ viagem.situacao }}</span>
         </a>
       }
     </div>
@@ -26,7 +26,7 @@
       <li class="list-group-item">
         <div>
           <strong>{{ solicitacao.viagem.origem }} → {{ solicitacao.viagem.destino }}</strong>
-          <span class="badge float-end" [ngClass]="{'bg-success': solicitacao.situacao === 'CONFIRMADA', 'bg-warning': solicitacao.situacao === 'SOLICITADA', 'bg-danger': solicitacao.situacao === 'CANCELADA'}">
+          <span class="badge float-end" [ngClass]="{'bg-info': solicitacao.situacao === 'CONFIRMADA', 'bg-warning': solicitacao.situacao === 'SOLICITADA', 'bg-danger': solicitacao.situacao === 'CANCELADA', 'bg-success': solicitacao.situacao === 'FINALIZADA'}">
             {{ solicitacao.situacao }}
           </span>
         </div>
