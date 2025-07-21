@@ -15,7 +15,15 @@ export class VeiculoService {
     return this.http.get<Veiculo[]>(`${this.apiUrl}/motorista/${motoristaId}`);
   }
 
+  getVeiculoPorId(id: number): Observable<Veiculo> {
+    return this.http.get<Veiculo>(`${this.apiUrl}/${id}`);
+  }
+
   salvar(veiculo: Veiculo): Observable<Veiculo> {
     return this.http.post<Veiculo>(this.apiUrl, veiculo);
+  }
+
+  atualizar(id: number, veiculo: Veiculo): Observable<Veiculo> {
+    return this.http.put<Veiculo>(`${this.apiUrl}/${id}`, veiculo);
   }
 }

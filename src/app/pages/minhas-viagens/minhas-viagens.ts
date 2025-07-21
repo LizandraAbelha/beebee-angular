@@ -46,13 +46,17 @@ export class MinhasViagens implements OnInit {
 
   carregarViagensMotorista(): void {
     this.viagemService.getByMotoristaId(this.alunoLogadoId).subscribe(data => {
-      this.viagensComoMotorista = data;
+      this.viagensComoMotorista = data.filter(viagem =>
+        viagem.situacao !== 'CANCELADA' && viagem.situacao !== 'FINALIZADA'
+      );
     });
   }
 
   carregarViagensPassageiro(): void {
     this.viagemAlunoService.getByAlunoId(this.alunoLogadoId).subscribe(data => {
-      this.viagensComoPassageiro = data;
+      this.viagensComoPassageiro = data.filter(solicitacao =>
+        solicitacao.situacao !== 'CANCELADA' && solicitacao.situacao !== 'FINALIZADA'
+      );
     });
   }
 

@@ -1,10 +1,10 @@
 @if (viagem) {
-  <div class="card">
+  <div class="card mt-4">
     <div class="card-header">
-      <h2>Detalhes da Viagem</h2>
+      <h3 class="mb-0">Detalhes da Viagem</h3>
     </div>
     <div class="card-body">
-      <h4 class="card-title">{{ viagem.origem }} → {{ viagem.destino }}</h4>
+      <h4>{{ viagem.origem }} → {{ viagem.destino }}</h4>
       <p class="card-text">{{ viagem.descricao }}</p>
       <ul class="list-group list-group-flush">
         <li class="list-group-item"><strong>Data:</strong> {{ viagem.dataInicio | date:'fullDate' }} às {{ viagem.dataInicio | date:'shortTime' }}</li>
@@ -12,9 +12,9 @@
           <strong>Situação:</strong>
           <span class="badge" [ngClass]="{
             'bg-primary': viagem.situacao === 'PLANEJADA',
-            'bg-info text-dark': viagem.situacao === 'EM_ANDAMENTO',
-            'bg-danger': viagem.situacao === 'CANCELADA',
-            'bg-secondary': viagem.situacao === 'FINALIZADA'
+            'bg-warning text-dark': viagem.situacao === 'EM_ANDAMENTO',
+            'bg-success': viagem.situacao === 'FINALIZADA',
+            'bg-danger': viagem.situacao === 'CANCELADA'
           }">
             {{ viagem.situacao }}
           </span>
@@ -34,6 +34,9 @@
               <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-outline-secondary btn-sm ms-2">Editar</a>
             }
           }
+          @if(viagem.situacao === 'EM_ANDAMENTO') {
+            <button (click)="encerrarViagem()" class="btn btn-primary btn-sm ms-2">Encerrar Viagem</button>
+          }
         </div>
         <hr>
         <h5>Pedidos de Participação</h5>
@@ -45,10 +48,10 @@
                 <div>
                   @if(pedido.situacao === 'SOLICITADA') {
                     <button (click)="gerirPedido(pedido, 'CONFIRMADA')" class="btn btn-sm btn-success">Aprovar</button>
-                    <button (click)="gerirPedido(pedido, 'CANCELADA')" class="btn btn-sm btn-danger ms-2">Recusar</button>
+                    <button (click)="gerirPedido(pedido, 'RECUSADA')" class="btn btn-sm btn-danger ms-2">Recusar</button>
                   }
                   @if(pedido.situacao === 'CONFIRMADA' && viagem.situacao === 'EM_ANDAMENTO') {
-                    <button (click)="finalizarViagem(pedido)" class="btn btn-sm btn-info">Finalizar Carona</button>
+                    <button (click)="finalizarCaronaPassageiro(pedido)" class="btn btn-sm btn-info">Finalizar Carona</button>
                   }
                 </div>
               </li>
@@ -65,7 +68,7 @@
                 'alert-warning': minhaSolicitacao.situacao === 'SOLICITADA',
                 'alert-success': minhaSolicitacao.situacao === 'CONFIRMADA',
                 'alert-info': minhaSolicitacao.situacao === 'FINALIZADA',
-                'alert-danger': minhaSolicitacao.situacao === 'CANCELADA'
+                'alert-danger': minhaSolicitacao.situacao === 'CANCELADA' || minhaSolicitacao.situacao === 'RECUSADA'
               }">
                 <p class="mb-0"><strong>Status da sua solicitação:</strong> {{ minhaSolicitacao.situacao }}</p>
               </div>

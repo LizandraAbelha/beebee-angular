@@ -11,16 +11,16 @@ export class ViagemAlunoService {
 
   constructor(private http: HttpClient) { }
 
-  solicitar(solicitacao: ViagemAluno): Observable<ViagemAluno> {
-    return this.http.post<ViagemAluno>(this.apiUrl, solicitacao);
-  }
-
   getByViagemId(viagemId: number): Observable<ViagemAluno[]> {
     return this.http.get<ViagemAluno[]>(`${this.apiUrl}/viagem/${viagemId}`);
   }
 
-  atualizarStatus(id: number, solicitacao: ViagemAluno): Observable<ViagemAluno> {
-    return this.http.put<ViagemAluno>(`${this.apiUrl}/${id}`, solicitacao);
+  solicitar(solicitacao: Partial<ViagemAluno>): Observable<ViagemAluno> {
+    return this.http.post<ViagemAluno>(this.apiUrl, solicitacao);
+  }
+
+  atualizarStatus(id: number, payload: ViagemAluno): Observable<ViagemAluno> {
+    return this.http.put<ViagemAluno>(`${this.apiUrl}/${id}`, payload);
   }
 
   getByAlunoId(alunoId: number): Observable<ViagemAluno[]> {

@@ -11,7 +11,6 @@ import { ViagemDetail } from './pages/viagem-detail/viagem-detail';
 import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
 import { Historico } from './pages/historico/historico';
 
-
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: 'login', component: Login },
