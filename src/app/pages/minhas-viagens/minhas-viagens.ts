@@ -4,6 +4,7 @@ import { Viagem } from '../../models/viagem';
 import { ViagemAluno } from '../../models/viagem-aluno';
 import { ViagemService } from '../../services/viagem';
 import { ViagemAlunoService } from '../../services/viagem-aluno';
+import { VeiculoService } from '../../services/veiculo';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -17,31 +18,39 @@ export class MinhasViagens implements OnInit {
   viagensComoMotorista: Viagem[] = [];
   viagensComoPassageiro: ViagemAluno[] = [];
   alunoLogadoId: number = 0;
+  isMotorista: boolean = false;
 
   constructor(
     private viagemService: ViagemService,
-    private viagemAlunoService: ViagemAlunoService
+    private viagemAlunoService: ViagemAlunoService,
+    private veiculoService: VeiculoService
   ) {}
 
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
     if (this.alunoLogadoId) {
-      console.log('--- Depurando Minhas Caronas ---');
       this.carregarViagensMotorista();
       this.carregarViagensPassageiro();
     }
   }
 
+  verificarSeEhMotorista(): void {
+    this.veiculoService.getVeiculosPorMotorista(this.alunoLogadoId).subscribe(veiculos => {
+      this.isMotorista = veiculos.length > 0;
+      if (this.isMotorista) {
+        this.carregarViagensMotorista();
+      }
+    });
+  }
+
   carregarViagensMotorista(): void {
     this.viagemService.getByMotoristaId(this.alunoLogadoId).subscribe(data => {
-      console.log('API retornou para Motorista:', data);
       this.viagensComoMotorista = data;
     });
   }
 
   carregarViagensPassageiro(): void {
     this.viagemAlunoService.getByAlunoId(this.alunoLogadoId).subscribe(data => {
-      console.log('API retornou para Passageiro:', data);
       this.viagensComoPassageiro = data;
     });
   }

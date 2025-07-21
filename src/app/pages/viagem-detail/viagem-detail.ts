@@ -13,6 +13,7 @@ import { ViagemAluno } from '../../models/viagem-aluno';
   templateUrl: './viagem-detail.html',
   styleUrl: './viagem-detail.css'
 })
+
 export class ViagemDetail implements OnInit {
   viagem: Viagem | null = null;
   alunoLogadoId: number = 0;
@@ -28,30 +29,10 @@ export class ViagemDetail implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    const alunoId = localStorage.getItem('aluno_id');
-
-    if (alunoId) {
-      this.alunoLogadoId = Number(alunoId);
-    } else {
-      this.router.navigate(['/login']);
-      return;
-    }
-
-    if (id) {
-      const viagemId = Number(id);
-
-      this.viagemService.getById(Number(id)).subscribe(data => {
-        this.viagem = data;
-        console.log('Detalhes da viagem carregados:', this.viagem);
-
-        this.isMotorista = this.alunoLogadoId === this.viagem.motoristaId;
-        console.log('Este usuário é o motorista?', this.isMotorista);
-
-        if (this.isMotorista) {
-          this.carregarPedidos(viagemId);
-        }
-      });
+    this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
+    const viagemIdString = this.route.snapshot.paramMap.get('id');
+    if (viagemIdString) {
+      this.carregarDetalhesViagem(Number(viagemIdString));
     }
   }
 
@@ -72,21 +53,20 @@ export class ViagemDetail implements OnInit {
 
   gerirPedido(pedido: ViagemAluno, novoStatus: 'CONFIRMADA' | 'CANCELADA'): void {
     if (!this.viagem) return;
-    const pedidoAtualizado = { ...pedido, situacao: novoStatus };
+    const pedidoAtualizado: ViagemAluno = { ...pedido, situacao: novoStatus };
     this.viagemAlunoService.atualizarStatus(pedido.id!, pedidoAtualizado).subscribe(() => {
       alert(`Pedido ${novoStatus === 'CONFIRMADA' ? 'aprovado' : 'recusado'} com sucesso!`);
       this.carregarPedidos(this.viagem!.id!);
     });
   }
 
-  solicitarParticipacao() {
+  solicitarParticipacao(): void {
     if (!this.viagem) return;
 
     const novaSolicitacao: ViagemAluno = {
       dataSolicitacao: new Date().toISOString(),
       situacao: 'SOLICITADA',
       alunoId: this.alunoLogadoId,
-      viagemId: this.viagem.id!,
       viagem: this.viagem
     };
 
@@ -106,9 +86,7 @@ export class ViagemDetail implements OnInit {
     if (!confirm('Tem a certeza de que deseja finalizar esta boleia para este passageiro?')) {
       return;
     }
-
     const pedidoFinalizado: ViagemAluno = { ...pedido, situacao: 'FINALIZADA' };
-
     this.viagemAlunoService.atualizarStatus(pedido.id!, pedidoFinalizado).subscribe(() => {
       alert('Boleia finalizada com sucesso!');
       this.carregarPedidos(this.viagem!.id!);
@@ -116,15 +94,24 @@ export class ViagemDetail implements OnInit {
   }
 
   encerrarViagem(): void {
-    if (!this.viagem || !confirm('Tem a certeza de que deseja encerrar esta viagem para todos? Ninguém mais poderá solicitar participação.')) {
+    if (!this.viagem || !confirm('Tem a certeza de que deseja encerrar esta viagem para todos?')) {
       return;
     }
-
     const viagemAtualizada = { ...this.viagem, situacao: 'FINALIZADA' };
-
     this.viagemService.update(this.viagem.id!, viagemAtualizada).subscribe(viagemAtualizadaDoServidor => {
       this.viagem = viagemAtualizadaDoServidor;
       alert('Viagem encerrada com sucesso!');
+    });
+  }
+
+  cancelarViagem(): void {
+    if (!this.viagem || !confirm('Tem a certeza de que deseja cancelar esta viagem?')) {
+        return;
+    }
+    const viagemCancelada = { ...this.viagem, situacao: 'CANCELADA' };
+    this.viagemService.update(this.viagem.id!, viagemCancelada).subscribe(() => {
+        alert('Viagem cancelada com sucesso!');
+        this.router.navigate(['/app/minhas-viagens']);
     });
   }
 }

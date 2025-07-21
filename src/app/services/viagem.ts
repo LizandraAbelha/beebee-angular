@@ -30,4 +30,8 @@ export class ViagemService {
   update(id: number, viagem: Viagem): Observable<Viagem> {
     return this.http.put<Viagem>(`${this.apiUrl}/${id}`, viagem);
   }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
 }

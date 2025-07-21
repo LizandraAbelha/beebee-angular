@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ViagemService } from '../../services/viagem';
 import { Viagem } from '../../models/viagem';
 
@@ -12,7 +12,7 @@ import { Viagem } from '../../models/viagem';
   templateUrl: './viagem-form.html',
   styleUrls: ['./viagem-form.css']
 })
-export class ViagemForm {
+export class ViagemForm implements OnInit {
   viagem: Viagem = {
     descricao: '',
     dataInicio: '',
@@ -22,17 +22,41 @@ export class ViagemForm {
     situacao: 'PLANEJADA',
     motoristaId: Number(localStorage.getItem('aluno_id'))
   };
+  isEditMode: boolean = false;
+  pageTitle: string = 'Criar Nova Viagem';
 
   constructor(
     private viagemService: ViagemService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
+
+  ngOnInit(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id) {
+      this.isEditMode = true;
+      this.pageTitle = 'Editar Viagem';
+      this.viagemService.getById(Number(id)).subscribe(data => {
+        this.viagem = {
+          ...data,
+          dataInicio: this.formatDateForInput(data.dataInicio),
+          dataFim: this.formatDateForInput(data.dataFim),
+        };
+      });
+    }
+  }
+
+  private formatDateForInput(dateStr: string): string {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    return date.toISOString().substring(0, 16);
+  }
 
   salvarViagem() {
     this.viagemService.salvar(this.viagem).subscribe({
       next: () => {
         alert('Viagem criada com sucesso!');
-        this.router.navigate(['/app/home']);
+        this.router.navigate(['/app/minhas-viagens']);
       },
       error: (err) => {
         console.error('Erro ao criar viagem:', err);

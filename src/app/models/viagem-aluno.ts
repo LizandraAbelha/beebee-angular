@@ -7,7 +7,6 @@ export interface ViagemAluno {
   observacao?: string;
   situacao: 'SOLICITADA' | 'PENDENTE' | 'CONFIRMADA' | 'CANCELADA' | 'FINALIZADA';
   alunoId: number;
-  viagemId: number;
   alunoNome?: string;
   viagem: Viagem;
 }

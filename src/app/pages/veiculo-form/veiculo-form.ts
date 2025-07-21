@@ -13,7 +13,6 @@ import { Veiculo } from '../../models/veiculo'; // <-- Importa o nosso novo mode
   styleUrls: ['./veiculo-form.css']
 })
 export class VeiculoForm {
-  // O objeto 'veiculo' agora segue a estrutura da nossa interface Veiculo
   veiculo: Veiculo = {
     placa: '',
     modelo: '',

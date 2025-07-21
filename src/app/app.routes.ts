@@ -9,6 +9,7 @@ import { ViagemForm } from './pages/viagem-form/viagem-form';
 import { ViagemList } from './pages/viagem-list/viagem-list';
 import { ViagemDetail } from './pages/viagem-detail/viagem-detail';
 import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
+import { Historico } from './pages/historico/historico';
 
 
 export const routes: Routes = [
@@ -29,6 +30,8 @@ export const routes: Routes = [
       { path: 'viagens/nova', component: ViagemForm },
       { path: 'viagens/:id', component: ViagemDetail },
       { path: 'minhas-viagens', component: MinhasViagens },
+      { path: 'viagens/editar/:id', component: ViagemForm },
+      { path: 'historico', component: Historico },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
