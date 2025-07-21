@@ -7,8 +7,18 @@
       <h4 class="card-title">{{ viagem.origem }} → {{ viagem.destino }}</h4>
       <p class="card-text">{{ viagem.descricao }}</p>
       <ul class="list-group list-group-flush">
-        <li class="list-group-item"><strong>Data:</strong> {{ viagem.dataInicio | date:'full' }}</li>
-        <li class="list-group-item"><strong>Situação:</strong> <span class="badge bg-info">{{ viagem.situacao }}</span></li>
+        <li class="list-group-item"><strong>Data:</strong> {{ viagem.dataInicio | date:'fullDate' }} às {{ viagem.dataInicio | date:'shortTime' }}</li>
+        <li class="list-group-item">
+          <strong>Situação:</strong>
+          <span class="badge" [ngClass]="{
+            'bg-primary': viagem.situacao === 'PLANEJADA',
+            'bg-info text-dark': viagem.situacao === 'EM_ANDAMENTO',
+            'bg-danger': viagem.situacao === 'CANCELADA',
+            'bg-secondary': viagem.situacao === 'FINALIZADA'
+          }">
+            {{ viagem.situacao }}
+          </span>
+        </li>
         <li class="list-group-item"><strong>Motorista:</strong> {{ viagem.motoristaNome }}</li>
       </ul>
     </div>
@@ -17,11 +27,12 @@
       @if (isMotorista) {
         <div class="mb-3">
           <strong>Ações da Viagem:</strong>
-          @if(pedidos.length === 0 && viagem.situacao === 'PLANEJADA') {
-            <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-outline-secondary btn-sm ms-2">Editar</a>
-          }
           @if(viagem.situacao === 'PLANEJADA') {
+            <button (click)="iniciarViagem()" class="btn btn-success btn-sm ms-2">Iniciar Viagem</button>
             <button (click)="cancelarViagem()" class="btn btn-danger btn-sm ms-2">Cancelar Viagem</button>
+            @if(pedidos.length === 0) {
+              <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-outline-secondary btn-sm ms-2">Editar</a>
+            }
           }
         </div>
         <hr>
@@ -36,8 +47,8 @@
                     <button (click)="gerirPedido(pedido, 'CONFIRMADA')" class="btn btn-sm btn-success">Aprovar</button>
                     <button (click)="gerirPedido(pedido, 'CANCELADA')" class="btn btn-sm btn-danger ms-2">Recusar</button>
                   }
-                  @if(pedido.situacao === 'CONFIRMADA') {
-                    <button (click)="finalizarViagem(pedido)" class="btn btn-sm btn-info">Finalizar</button>
+                  @if(pedido.situacao === 'CONFIRMADA' && viagem.situacao === 'EM_ANDAMENTO') {
+                    <button (click)="finalizarViagem(pedido)" class="btn btn-sm btn-info">Finalizar Carona</button>
                   }
                 </div>
               </li>

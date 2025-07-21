@@ -29,7 +29,7 @@ export class MinhasViagens implements OnInit {
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
     if (this.alunoLogadoId) {
-      this.carregarViagensMotorista();
+      this.verificarSeEhMotorista();
       this.carregarViagensPassageiro();
     }
   }
@@ -37,6 +37,7 @@ export class MinhasViagens implements OnInit {
   verificarSeEhMotorista(): void {
     this.veiculoService.getVeiculosPorMotorista(this.alunoLogadoId).subscribe(veiculos => {
       this.isMotorista = veiculos.length > 0;
+
       if (this.isMotorista) {
         this.carregarViagensMotorista();
       }

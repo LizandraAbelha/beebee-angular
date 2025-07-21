@@ -27,6 +27,10 @@ export class ViagemService {
     return this.http.get<Viagem[]>(`${this.apiUrl}/motorista/${motoristaId}`);
   }
 
+  getHistoricoByMotoristaId(motoristaId: number): Observable<Viagem[]> {
+    return this.http.get<Viagem[]>(`${this.apiUrl}/historico/motorista/${motoristaId}`);
+  }
+
   update(id: number, viagem: Viagem): Observable<Viagem> {
     return this.http.put<Viagem>(`${this.apiUrl}/${id}`, viagem);
   }
