@@ -1,7 +1,4 @@
-
-
 <div class="home-container">
-  <div #map class="map-container"></div>
 
   @if (viagemEmDestaque && motoristaDoDestaque) {
     <div class="ride-status-card">
@@ -40,6 +37,14 @@
         <div class="ride-actions">
           @if (viagemEmDestaque.situacao === 'FINALIZADA') {
             <a routerLink="/app/historico" class="btn btn-evaluate">Avaliar</a>
+          } @else if (viagemEmDestaque.situacao === 'SOLICITADA') {
+            <span class="status-text">Aguardando...</span>
+          } @else if (viagemEmDestaque.situacao === 'CONFIRMADA') {
+            <span class="status-text">Em Andamento</span>
+          } @else if (viagemEmDestaque.situacao === 'RECUSADA') {
+            <span class="status-text">Recusada</span>
+          } @else if (viagemEmDestaque.situacao === 'CANCELADA') {
+            <span class="status-text">Cancelada</span>
           } @else {
             <span class="status-text">Aguardando...</span>
           }
@@ -74,11 +79,7 @@
         </div>
 
         <div class="d-grid form-footer">
-          @if (possuiVeiculos) {
-            <a routerLink="/app/viagens/nova" class="btn btn-primary btn-block">Oferecer Carona</a>
-          } @else {
             <button type="submit" class="btn btn-primary btn-block">Buscar Carona</button>
-          }
         </div>
       </form>
     </div>

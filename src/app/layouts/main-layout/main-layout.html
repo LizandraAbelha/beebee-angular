@@ -20,11 +20,15 @@
 
   <nav class="sidebar-nav">
     <a routerLink="/app/home" routerLinkActive="active" (click)="toggleSidebar()">Home</a>
-    <a routerLink="/app/veiculos" routerLinkActive="active" (click)="toggleSidebar()">Meus Veículos</a>
+    @if (hasVehicles) {
+      <a routerLink="/app/veiculos" routerLinkActive="active" (click)="toggleSidebar()">Meus Veículos</a>
+    } @else {
+      <a routerLink="/app/veiculos/form" routerLinkActive="active" (click)="toggleSidebar()">Quero ser Motorista BeeBee!</a>
+    }
     <a routerLink="/app/minhas-viagens" routerLinkActive="active" (click)="toggleSidebar()">Minhas Caronas</a>
     <a routerLink="/app/historico" routerLinkActive="active" (click)="toggleSidebar()">Histórico</a>
     <a routerLink="/app/meu-perfil" routerLinkActive="active" (click)="toggleSidebar()">Meu Perfil</a>
-     <a routerLink="/app/horarios" routerLinkActive="active" (click)="toggleSidebar()">Horário Acadêmico</a>
+    <a routerLink="/app/horarios" routerLinkActive="active" (click)="toggleSidebar()">Horário Acadêmico</a>
     <a routerLink="/app/notificacoes" routerLinkActive="active" (click)="toggleSidebar()">Notificações
       @if (notificacoes.length > 0) {
         <span class="notification-badge">{{ notificacoes.length }}</span>
@@ -38,3 +42,5 @@
 <main>
   <router-outlet></router-outlet>
 </main>
+
+<div id="global-map-background"></div>

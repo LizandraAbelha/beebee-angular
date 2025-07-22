@@ -8,6 +8,7 @@ import { NotificacaoService } from '../../services/notificacao';
 import { Subscription, interval } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SidebarService } from '../../services/sidebar';
+import { VeiculoService } from '../../services/veiculo';
 
 @Component({
   selector: 'app-main-layout',
@@ -23,6 +24,7 @@ export class MainLayout implements OnInit, OnDestroy {
   private notificacaoSubscription!: Subscription;
   private sidebarSubscription!: Subscription;
   isSidebarOpen = false;
+  hasVehicles: boolean = false;
 
   public environment = environment;
 
@@ -30,7 +32,8 @@ export class MainLayout implements OnInit, OnDestroy {
     private router: Router,
     private alunoService: AlunoService,
     private notificacaoService: NotificacaoService,
-    private sidebarService: SidebarService
+    private sidebarService: SidebarService,
+    private veiculoService: VeiculoService
   ) {}
 
   ngOnInit(): void {
@@ -48,6 +51,7 @@ export class MainLayout implements OnInit, OnDestroy {
       this.notificacaoSubscription = interval(30000).subscribe(() => {
         this.carregarNotificacoes(alunoId);
       });
+      this.checkUserVehicles(alunoId);
     }
   }
 
@@ -70,7 +74,6 @@ export class MainLayout implements OnInit, OnDestroy {
     this.isSidebarOpen = !this.isSidebarOpen;
   }
 
-  // A função agora pega o nome diretamente do objeto 'aluno'
   getIniciais(): string {
     const nome = this.aluno?.nome;
     if (!nome) return '';
@@ -92,8 +95,25 @@ export class MainLayout implements OnInit, OnDestroy {
     }
   }
 
-  marcarComoLida(notificacao: Notificacao, event: Event): void { /* ...código original... */ }
-  navegarParaLink(notificacao: Notificacao): void { /* ...código original... */ }
+  checkUserVehicles(alunoId: number): void {
+    this.veiculoService.getVeiculosPorMotorista(alunoId).subscribe(veiculos => {
+      this.hasVehicles = veiculos && veiculos.length > 0;
+    });
+  }
+
+  marcarComoLida(notificacao: Notificacao, event: Event): void {
+    event.stopPropagation();
+    notificacao.lida = true;
+    this.notificacaoService.marcarComoLida(notificacao.id).subscribe(() => {
+      this.unreadCount--;
+    });
+  }
+  navegarParaLink(notificacao: Notificacao): void {
+    if (notificacao.link) {
+      this.router.navigate([notificacao.link]);
+      this.marcarComoLida(notificacao, new MouseEvent('click'));
+    }
+  }
 
   logout() {
     this.toggleSidebar();

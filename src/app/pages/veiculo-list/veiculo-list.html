@@ -1,27 +1,31 @@
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h2>Meus Veículos</h2>
-  <a routerLink="/app/veiculos/form" class="btn btn-primary">Adicionar Novo Veículo</a>
-</div>
-
-@if (veiculos.length > 0) {
-  <ul class="list-group">
-    @for (veiculo of veiculos; track veiculo.id) {
-      <li class="list-group-item d-flex justify-content-between align-items-center">
-        <div>
-          <h5 class="mb-1">{{ veiculo.modelo }} - {{ veiculo.cor }}</h5>
-          <p class="mb-1 text-muted">Placa: {{ veiculo.placa }}</p>
-        </div>
-
-        <div>
-          <a [routerLink]="['/app/veiculos/form', veiculo.id]" class="btn btn-secondary btn-sm">Editar</a>
-          <button class="btn btn-danger btn-sm ms-2">Excluir</button>
-        </div>
-
-      </li>
-    }
-  </ul>
-} @else {
-  <div class="alert alert-info">
-    Você ainda não cadastrou nenhum veículo.
+<div class="veiculo-list-container">
+  <div class="header-section">
+    <h2>Meus Veículos</h2>
+    <a routerLink="/app/veiculos/form" class="btn btn-primary">Novo Veículo</a>
   </div>
-}
+
+  @if (veiculos.length > 0) {
+    <div class="veiculos-grid">
+      @for (veiculo of veiculos; track veiculo.id) {
+        <div class="veiculo-card">
+          <div class="card-icon">
+            <img src="assets/icons/smart car.png" alt="Ícone de Carro">
+          </div>
+          <div class="card-details">
+            <h5 class="vehicle-model">{{ veiculo.modelo }} - {{ veiculo.cor }}</h5>
+            <p class="vehicle-plate">Placa: <strong>{{ veiculo.placa }}</strong></p>
+          </div>
+          <div class="card-actions">
+            <a [routerLink]="['/app/veiculos/form', veiculo.id]" class="btn btn-secondary btn-sm">Editar</a>
+            <button (click)="excluir(veiculo.id)" class="btn btn-danger btn-sm ms-2">Excluir</button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="alert alert-info empty-state">
+      <p class="mb-0">Você ainda não cadastrou nenhum veículo.</p>
+      <p class="mb-0">Cadastre seu primeiro veículo para começar a oferecer caronas!</p>
+    </div>
+  }
+</div>

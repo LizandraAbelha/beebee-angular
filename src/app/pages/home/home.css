@@ -1,26 +1,54 @@
+/* src/app/pages/home/home.css */
+
+.home-container {
+  /* REMOVEMOS: */
+  /* position: fixed; */
+  /* top: 0; */
+  /* left: 0; */
+  /* width: 100vw; */
+  /* height: 100vh; */
+
+  /* Adicionamos flex para que o conteúdo (cards) possa ser posicionado */
+  display: flex;
+  flex-direction: column; /* Organiza os cards verticalmente */
+  align-items: center;   /* Centraliza os cards horizontalmente */
+  flex-grow: 1;          /* Permite que ele ocupe o espaço disponível do main */
+  position: relative;    /* Importante para que elementos com position: absolute dentro dele funcionem */
+  padding: 20px;         /* Adiciona um padding geral para o conteúdo da Home */
+  box-sizing: border-box; /* Garante que o padding não adicione largura total */
+}
+
+/* REMOVER ESTE BLOCO, pois o mapa agora é global em main-layout.html */
+/*
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+*/
+
+/* O restante do seu CSS para os cards e elementos da Home permanece o mesmo */
 .ride-status-card {
-  position: absolute;
+  position: absolute; /* Mantenha absolute para posicionamento específico */
   top: 80px;
   left: 50%;
   transform: translateX(-50%);
   width: 90%;
-  max-width: 500px; /* Aumentado para acomodar as colunas */
+  max-width: 500px;
   background-color: white;
-  border-radius: 1.25rem; /* Bordas mais arredondadas */
-  box-shadow: 0 8px G25px rgba(0, 0, 0, 0.1);
+  border-radius: 1.25rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Corrigido de G25px para 25px */
   z-index: 10;
   padding: 1.5rem;
-  display: flex; /* Ativa o layout de colunas */
-  gap: 1.5rem;   /* Espaço entre as colunas */
+  display: flex;
+  gap: 1.5rem;
 }
 
-/* Coluna da Esquerda */
 .status-col-left {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  flex-basis: 35%; /* Define a largura da coluna */
+  flex-basis: 35%;
 }
 
 .driver-pic, .driver-pic-initials {
@@ -59,13 +87,11 @@
   color: #6c757d;
 }
 
-
-/* Coluna da Direita */
 .status-col-right {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-basis: 65%; /* Define a largura da coluna */
+  flex-basis: 65%;
 }
 
 .trip-details {
@@ -120,43 +146,16 @@
   background-color: #e2e6ea;
 }
 
-.menu-toggle-btn {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 1051;
-  background-color: transparent;
-  border: none;
-  box-shadow: none;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-.menu-toggle-btn:hover { transform: scale(1.1); }
-.menu-toggle-btn img {
-  width: 35px;
-  height: 35px;
-}
-
-.home-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-.map-container {
-  width: 100%;
-  height: 100%;
-}
+/* O menu-toggle-btn NÃO DEVE ESTAR AQUI. Ele pertence apenas ao main-layout.css */
+/* REMOVER ESTAS REGRAS, pois elas já estão no main-layout.css e podem causar conflito: */
+/*
+.menu-toggle-btn { ... }
+.menu-toggle-btn:hover { ... }
+.menu-toggle-btn img { ... }
+*/
 
 .search-card {
-  position: absolute;
+  position: absolute; /* Mantenha absolute para posicionamento específico */
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
@@ -165,31 +164,100 @@
   background-color: white;
   border-radius: 1.5rem;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  z-index: 10; /* Garante que o card fique acima do mapa */
+  z-index: 10;
   padding: 1rem;
 }
 
-.search-card .card-header { display: flex; justify-content: space-between; align-items: center; background: none; border: none; padding: 0.5rem 0.5rem; }
-.search-card .card-header h4 { margin: 0; font-family: 'Baloo 2', cursive; font-weight: 700; font-size: 1.5rem; }
-.publish-link { font-weight: bold; color: #FEBE01; text-decoration: none; }
-.location-input { display: flex; align-items: center; position: relative; }
-.location-input .form-control { border: none; background-color: #f0f0f0; border-radius: 0.75rem; padding-left: 2.5rem; }
-.location-input .form-control:focus { box-shadow: 0 0 0 2px #FEBE01; background-color: white; }
-.location-icon-start, .location-icon-end { position: absolute; left: 1rem; width: 10px; height: 10px; border-radius: 50%; }
-.location-icon-start { background-color: #FEBE01; }
-.location-icon-end { background-color: #111; }
-.location-line { height: 20px; width: 2px; background-color: #e0e0e0; margin-left: calc(1rem + 4px); margin-top: -5px; margin-bottom: -5px; }
-.btn-icon { background: none; border: none; font-size: 1.5rem; color: #333; }
-.saved-places { margin-top: 1rem; margin-bottom: 1.5rem; }
-.place-item { display: flex; align-items: center; margin-bottom: 0.5rem; cursor: pointer; }
-.place-item img { width: 20px; margin-right: 1rem; }
-.place-item div { line-height: 1.2; }
-.place-item strong { font-size: 0.9rem; }
-.place-item p { font-size: 0.8rem; color: #888; margin: 0; }
+.search-card .card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+}
+.search-card .card-header h4 {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.publish-link {
+  font-weight: bold;
+  color: #FEBE01;
+  text-decoration: none;
+}
+.location-input {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.location-input .form-control {
+  border: none;
+  background-color: #f0f0f0;
+  border-radius: 0.75rem;
+  padding-left: 2.5rem;
+}
+.location-input .form-control:focus {
+  box-shadow: 0 0 0 2px #FEBE01;
+  background-color: white;
+}
+.location-icon-start, .location-icon-end {
+  position: absolute;
+  left: 1rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.location-icon-start {
+  background-color: #FEBE01;
+}
+.location-icon-end {
+  background-color: #111;
+}
+.location-line {
+  height: 20px;
+  width: 2px;
+  background-color: #e0e0e0;
+  margin-left: calc(1rem + 4px);
+  margin-top: -5px;
+  margin-bottom: -5px;
+}
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #333;
+}
+.saved-places {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+}
+.place-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+}
+.place-item img {
+  width: 20px;
+  margin-right: 1rem;
+}
+.place-item div {
+  line-height: 1.2;
+}
+.place-item strong {
+  font-size: 0.9rem;
+}
+.place-item p {
+  font-size: 0.8rem;
+  color: #888;
+  margin: 0;
+}
 
 .form-group {
   position: relative;
-  margin-bottom: 1rem; /* Espaçamento entre os campos */
+  margin-bottom: 1rem;
 }
 
 .input-icon {
@@ -231,5 +299,3 @@ input[type="date"] {
   border-radius: 2rem;
   padding: 0.75rem;
 }
-
-
