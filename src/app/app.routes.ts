@@ -11,6 +11,9 @@ import { ViagemDetail } from './pages/viagem-detail/viagem-detail';
 import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
 import { Historico } from './pages/historico/historico';
 import { MeuPerfil } from './pages/meu-perfil/meu-perfil';
+import { HorarioAcademicoList } from './pages/horario-academico-list/horario-academico-list';
+import { HorarioAcademicoForm } from './pages/horario-academico-form/horario-academico-form';
+
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -33,6 +36,10 @@ export const routes: Routes = [
       { path: 'minhas-viagens', component: MinhasViagens },
       { path: 'historico', component: Historico },
       { path: 'meu-perfil', component: MeuPerfil },
+
+      { path: 'horarios', component: HorarioAcademicoList },
+      { path: 'horarios/form', component: HorarioAcademicoForm },
+      { path: 'horarios/form/:id', component: HorarioAcademicoForm },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]
