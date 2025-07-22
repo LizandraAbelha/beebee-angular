@@ -8,4 +8,5 @@ export interface Viagem {
   situacao: string;
   motoristaId: number;
   motoristaNome?: string;
+  mediaMotorista?: number;
 }

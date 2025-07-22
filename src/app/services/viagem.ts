@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Viagem } from '../models/viagem';
@@ -15,8 +15,19 @@ export class ViagemService {
     return this.http.post<Viagem>(this.apiUrl, viagem);
   }
 
-  getAll(): Observable<Viagem[]> {
-    return this.http.get<Viagem[]>(this.apiUrl);
+  getAll(origem?: string, destino?: string, data?: string): Observable<Viagem[]> {
+    let params = new HttpParams();
+    if (origem) {
+      params = params.append('origem', origem);
+    }
+    if (destino) {
+      params = params.append('destino', destino);
+    }
+    if (data) {
+      params = params.append('data', data);
+    }
+
+    return this.http.get<Viagem[]>(this.apiUrl, { params });
   }
 
   getById(id: number): Observable<Viagem> {
