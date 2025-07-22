@@ -1,8 +1,7 @@
-/* Estilo geral para o cabeçalho do perfil */
 .profile-header {
   display: flex;
-  flex-direction: column; /* Coloca a foto em cima e o texto em baixo */
-  align-items: center;   /* Centraliza tudo */
+  flex-direction: column;
+  align-items: center;
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -19,18 +18,17 @@
 .profile-pic {
   width: 100%;
   height: 100%;
-  border-radius: 50%; /* Garante um círculo perfeito */
-  object-fit: cover;    /* Evita que a imagem fique distorcida */
-  border: 4px solid #fff; /* Borda branca elegante */
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Sombra suave para dar profundidade */
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* O botão/ícone para editar a foto */
 .profile-pic-edit-label {
   position: absolute;
   bottom: 5px;
   right: 5px;
-  background-color: #0d6efd; /* Cor primária do Bootstrap */
+  background-color: #0d6efd;
   color: white;
   width: 35px;
   height: 35px;
@@ -45,21 +43,20 @@
 }
 
 .profile-pic-edit-label:hover {
-  transform: scale(1.1); /* Efeito de zoom ao passar o rato */
+  transform: scale(1.1);
 }
 
-/* Informações do utilizador */
+
 .profile-info h5 {
-  font-size: 1.5rem; /* Nome maior */
+  font-size: 1.5rem;
   margin-bottom: 0;
 }
 
 .profile-info p {
   font-size: 1rem;
-  color: #6c757d; /* Cor de texto secundária do Bootstrap */
+  color: #6c757d;
 }
 
-/* Secção de reputação */
 .reputation-section {
   text-align: center;
 }
@@ -75,12 +72,12 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background-color: #0d6efd; /* Cor primária do Bootstrap */
+  background-color: #0d6efd;
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 3rem; /* Tamanho das letras */
+  font-size: 3rem; 
   font-weight: 600;
   border: 4px solid #fff;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);

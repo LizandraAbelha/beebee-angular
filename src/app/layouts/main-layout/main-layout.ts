@@ -1,4 +1,5 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+// src/app/layouts/main-layout/main-layout.ts
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 import { Aluno } from '../../models/aluno';
@@ -9,6 +10,7 @@ import { Subscription, interval } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { SidebarService } from '../../services/sidebar';
 import { VeiculoService } from '../../services/veiculo';
+import maplibregl from 'maplibre-gl';
 
 @Component({
   selector: 'app-main-layout',
@@ -17,7 +19,7 @@ import { VeiculoService } from '../../services/veiculo';
   templateUrl: './main-layout.html',
   styleUrls: ['./main-layout.css']
 })
-export class MainLayout implements OnInit, OnDestroy {
+export class MainLayout implements OnInit, OnDestroy, AfterViewInit {
   aluno: Aluno | null = null;
   notificacoes: Notificacao[] = [];
   unreadCount: number = 0;
@@ -27,6 +29,8 @@ export class MainLayout implements OnInit, OnDestroy {
   hasVehicles: boolean = false;
 
   public environment = environment;
+
+  private map: maplibregl.Map | undefined;
 
   constructor(
     private router: Router,
@@ -55,12 +59,20 @@ export class MainLayout implements OnInit, OnDestroy {
     }
   }
 
+  ngAfterViewInit(): void {
+    this.initializeMap();
+  }
+
   ngOnDestroy(): void {
     if (this.notificacaoSubscription) {
       this.notificacaoSubscription.unsubscribe();
     }
     if (this.sidebarSubscription) {
       this.sidebarSubscription.unsubscribe();
+    }
+    if (this.map) {
+      this.map.remove();
+      this.map = undefined;
     }
   }
 
@@ -101,18 +113,32 @@ export class MainLayout implements OnInit, OnDestroy {
     });
   }
 
-  marcarComoLida(notificacao: Notificacao, event: Event): void {
-    event.stopPropagation();
-    notificacao.lida = true;
-    this.notificacaoService.marcarComoLida(notificacao.id).subscribe(() => {
-      this.unreadCount--;
-    });
-  }
-  navegarParaLink(notificacao: Notificacao): void {
-    if (notificacao.link) {
-      this.router.navigate([notificacao.link]);
-      this.marcarComoLida(notificacao, new MouseEvent('click'));
+  initializeMap(): void {
+    const apiKey = environment.locationiqToken;
+
+    if (!apiKey || apiKey === 'COLE_SEU_TOKEN_AQUI') {
+      console.error('Token do LocationIQ não configurado em environment.ts');
+      return;
     }
+
+    const styleUrl = `https://tiles.locationiq.com/v3/streets/vector.json?key=${apiKey}`;
+
+    if (this.map) {
+      this.map.remove();
+      this.map = undefined;
+    }
+
+    this.map = new maplibregl.Map({
+      container: 'global-map-background',
+      style: styleUrl,
+      center: [-42.65004, -19.53882],
+      zoom: 14,
+    });
+
+    this.map.addControl(new maplibregl.NavigationControl(), 'top-right');
+
+    this.map.on('load', () => console.log('Mapa carregado com sucesso!'));
+    this.map.on('error', (e) => console.error('Erro no mapa:', e.error));
   }
 
   logout() {

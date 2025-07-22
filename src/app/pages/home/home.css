@@ -1,46 +1,72 @@
-/* src/app/pages/home/home.css */
-
 .home-container {
-  /* REMOVEMOS: */
-  /* position: fixed; */
-  /* top: 0; */
-  /* left: 0; */
-  /* width: 100vw; */
-  /* height: 100vh; */
-
-  /* Adicionamos flex para que o conteúdo (cards) possa ser posicionado */
   display: flex;
-  flex-direction: column; /* Organiza os cards verticalmente */
-  align-items: center;   /* Centraliza os cards horizontalmente */
-  flex-grow: 1;          /* Permite que ele ocupe o espaço disponível do main */
-  position: relative;    /* Importante para que elementos com position: absolute dentro dele funcionem */
-  padding: 20px;         /* Adiciona um padding geral para o conteúdo da Home */
-  box-sizing: border-box; /* Garante que o padding não adicione largura total */
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: transparent;
 }
-
-/* REMOVER ESTE BLOCO, pois o mapa agora é global em main-layout.html */
-/*
-.map-container {
+.home-content-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+  padding: 20px;
+  box-sizing: border-box;
 }
-*/
 
-/* O restante do seu CSS para os cards e elementos da Home permanece o mesmo */
 .ride-status-card {
-  position: absolute; /* Mantenha absolute para posicionamento específico */
-  top: 80px;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
   width: 90%;
   max-width: 500px;
   background-color: white;
   border-radius: 1.25rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Corrigido de G25px para 25px */
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
   z-index: 10;
   padding: 1.5rem;
   display: flex;
   gap: 1.5rem;
+  pointer-events: auto;
+}
+.search-card {
+  position: relative;
+  width: 90%;
+  max-width: 450px;
+  background-color: white;
+  border-radius: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  padding: 1rem;
+  pointer-events: auto;
+}
+
+.search-card
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0.5rem 0.5rem;
+}
+.search-card
+.card-header h4 {
+  margin: 0;
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+  font-size: 1.5rem;
+}
+.ride-actions {
+  text-align: right;
+  margin-top: 1rem;
 }
 
 .status-col-left {
@@ -50,8 +76,20 @@
   text-align: center;
   flex-basis: 35%;
 }
+.status-col-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-basis: 65%;
+}
+.status-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #ffc107;
+}
 
-.driver-pic, .driver-pic-initials {
+.driver-pic,
+.driver-pic-initials {
   width: 70px;
   height: 70px;
   border-radius: 50%;
@@ -60,7 +98,6 @@
   background-color: #e9ecef;
   margin-bottom: 0.75rem;
 }
-
 .driver-pic-initials {
   display: flex;
   align-items: center;
@@ -69,7 +106,6 @@
   font-size: 1.8rem;
   color: #495057;
 }
-
 .driver-name {
   font-size: 1.1rem;
   font-weight: 700;
@@ -81,17 +117,9 @@
   color: #212529;
   margin-top: 0.5rem;
 }
-
 .vehicle-plate {
   font-size: 0.8rem;
   color: #6c757d;
-}
-
-.status-col-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-basis: 65%;
 }
 
 .trip-details {
@@ -99,7 +127,6 @@
   flex-direction: column;
   gap: 0.75rem;
 }
-
 .trip-info-item {
   display: flex;
   align-items: center;
@@ -119,17 +146,14 @@
   margin-top: 1rem;
 }
 
-.ride-actions {
-  text-align: right;
-  margin-top: 1rem;
+.btn-primary {
+  background-color: #FEBE01;
+  border-color: #FEBE01;
+  color: #111111;
+  font-weight: 600;
+  border-radius: 2rem;
+  padding: 0.75rem;
 }
-
-.status-text {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #ffc107;
-}
-
 .btn-evaluate {
   background-color: #f0f0f0;
   color: #333;
@@ -141,68 +165,41 @@
   display: inline-block;
   transition: background-color 0.2s ease;
 }
-
 .btn-evaluate:hover {
   background-color: #e2e6ea;
 }
-
-/* O menu-toggle-btn NÃO DEVE ESTAR AQUI. Ele pertence apenas ao main-layout.css */
-/* REMOVER ESTAS REGRAS, pois elas já estão no main-layout.css e podem causar conflito: */
-/*
-.menu-toggle-btn { ... }
-.menu-toggle-btn:hover { ... }
-.menu-toggle-btn img { ... }
-*/
-
-.search-card {
-  position: absolute; /* Mantenha absolute para posicionamento específico */
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 90%;
-  max-width: 450px;
-  background-color: white;
-  border-radius: 1.5rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  z-index: 10;
-  padding: 1rem;
-}
-
-.search-card .card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.btn-icon {
   background: none;
   border: none;
-  padding: 0.5rem 0.5rem;
-}
-.search-card .card-header h4 {
-  margin: 0;
-  font-family: 'Baloo 2', cursive;
-  font-weight: 700;
   font-size: 1.5rem;
+  color: #333;
 }
+
 .publish-link {
   font-weight: bold;
   color: #FEBE01;
   text-decoration: none;
 }
+
 .location-input {
   display: flex;
   align-items: center;
   position: relative;
 }
-.location-input .form-control {
+.location-input
+.form-control {
   border: none;
   background-color: #f0f0f0;
   border-radius: 0.75rem;
   padding-left: 2.5rem;
 }
-.location-input .form-control:focus {
+.location-input
+.form-control:focus {
   box-shadow: 0 0 0 2px #FEBE01;
   background-color: white;
 }
-.location-icon-start, .location-icon-end {
+.location-icon-start,
+.location-icon-end {
   position: absolute;
   left: 1rem;
   width: 10px;
@@ -223,12 +220,7 @@
   margin-top: -5px;
   margin-bottom: -5px;
 }
-.btn-icon {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: #333;
-}
+
 .saved-places {
   margin-top: 1rem;
   margin-bottom: 1.5rem;
@@ -259,6 +251,19 @@
   position: relative;
   margin-bottom: 1rem;
 }
+.form-control {
+  border: 1px solid #D1D1D1;
+  border-radius: 2rem;
+  padding-left: 3rem;
+  height: 50px;
+}
+.form-control:focus {
+  box-shadow: 0 0 0 2px #FEBE01;
+  background-color: white;
+}
+.form-footer {
+  margin-top: 1rem;
+}
 
 .input-icon {
   position: absolute;
@@ -270,32 +275,7 @@
   opacity: 0.5;
 }
 
-.form-control {
-  border: 1px solid #D1D1D1;
-  border-radius: 2rem;
-  padding-left: 3rem;
-  height: 50px;
-}
-
 input[type="text"][placeholder="dd/mm/aaaa"],
 input[type="date"] {
   padding-left: 1rem;
-}
-
-.form-control:focus {
-  box-shadow: 0 0 0 2px #FEBE01;
-  background-color: white;
-}
-
-.form-footer {
-  margin-top: 1rem;
-}
-
-.btn-primary {
-  background-color: #FEBE01;
-  border-color: #FEBE01;
-  color: #111111;
-  font-weight: 600;
-  border-radius: 2rem;
-  padding: 0.75rem;
 }

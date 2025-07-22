@@ -110,7 +110,7 @@ export class Home implements OnInit, AfterViewInit {
       this.map = new maplibregl.Map({
         container: 'global-map-background',
         style: styleUrl,
-        center: [-42.6281, -19.5186], // Centro em Coronel Fabriciano, MG
+        center: [-42.65004, -19.53882],
         zoom: 14,
       });
 

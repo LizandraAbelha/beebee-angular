@@ -1,11 +1,11 @@
 .bees-container {
   display: inline-block;
   font-size: 1.2rem;
-  color: #ffc107; /* Cor da estrela preenchida */
+  color: #ffc107;
 }
 
 .bee {
-  color: #e0e0e0; /* Cor da estrela vazia */
+  color: #e0e0e0;
   margin-right: 2px;
 }
 

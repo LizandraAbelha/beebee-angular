@@ -156,10 +156,11 @@
   height: 100%;
   z-index: 0;
   background-color: transparent;
+  pointer-events: auto;
 }
 
 main {
-  padding: 20px;
+  padding: 0px;
   box-sizing: border-box;
   height: 100vh;
   display: flex;
@@ -167,6 +168,7 @@ main {
   z-index: 1;
   position: relative;
   background-color: transparent;
+  pointer-events: none;
 }
 
 :host ::ng-deep router-outlet + * {

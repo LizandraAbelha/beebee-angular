@@ -9,14 +9,15 @@
 
 .viagem-card {
   width: 100%;
-  max-width: 550px; /* Um pouco mais largo para acomodar os campos duplos */
+  max-width: 550px;
   border-radius: 1rem;
   border: none;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  padding: 2.5rem 2rem; /* Mais padding interno para "respirar" */
+  padding: 2.5rem 2rem;
   background-color: #ffffff;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 
 .form-header {
@@ -24,7 +25,7 @@
   margin-bottom: 2rem;
 }
 
-.form-header img.logo-img { /* Estilo para o logo B.svg */
+.form-header img.logo-img {
   max-width: 120px;
   height: auto;
   margin-bottom: 0.5rem;
@@ -38,23 +39,22 @@
   margin-top: 0.5rem;
 }
 
-/* Estilos para os campos de formulário */
 .form-label {
-  display: block; /* Garante que o label ocupe sua própria linha */
+  display: block;
   margin-bottom: 0.5rem;
-  font-family: 'Poppins', sans-serif; /* Fonte para os labels */
+  font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   color: #555;
-  text-align: left; /* Alinha o label à esquerda */
+  text-align: left;
 }
 
 .form-control {
   border: 1px solid #D1D1D1;
-  border-radius: 2rem; /* Bordas arredondadas */
+  border-radius: 2rem;
   padding: 0.75rem 1.5rem;
-  height: 48px; /* Altura padrão */
+  height: 48px;
   font-size: 1rem;
-  width: 100%; /* Ocupa toda a largura da coluna */
+  width: 100%;
 }
 
 .form-control::placeholder {
@@ -68,18 +68,16 @@
 }
 
 textarea.form-control {
-  height: auto; /* Permite que o textarea ajuste a altura */
-  min-height: 100px; /* Altura mínima para o textarea */
-  border-radius: 1rem; /* Adapta o border-radius para textarea */
-  padding-top: 1rem; /* Ajusta padding para textarea */
-  padding-bottom: 1rem; /* Ajusta padding para textarea */
+  height: auto;
+  min-height: 100px;
+  border-radius: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
 
-
-/* Estilos para botões */
 .d-grid.gap-2 {
-  gap: 1rem; /* Espaçamento entre os botões */
-  margin-top: 1.5rem; /* Espaçamento acima dos botões */
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .btn-primary, .btn-secondary {
@@ -104,7 +102,7 @@ textarea.form-control {
 }
 
 .btn-secondary {
-  background-color: #DD1129; /* Cor vermelha para Cancelar, como o botão Sair */
+  background-color: #DD1129;
   border-color: #DD1129;
   color: #ffffff;
 }
@@ -116,12 +114,10 @@ textarea.form-control {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Espaçamento entre as linhas do formulário */
 .mb-3 {
   margin-bottom: 1rem !important;
 }
 
-/* Para garantir que as colunas se comportem bem em telas pequenas */
 .row {
     margin-left: -0.5rem;
     margin-right: -0.5rem;
