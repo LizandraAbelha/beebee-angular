@@ -28,6 +28,7 @@
   padding: 0.75rem 1.5rem;
   border-radius: 2rem;
   transition: all 0.2s ease-in-out;
+  pointer-events: auto;
 }
 
 .btn-primary:hover {
@@ -51,6 +52,7 @@
   align-items: center;
   text-align: center;
   transition: transform 0.2s ease;
+    pointer-events: auto;
 }
 
 .veiculo-card:hover {

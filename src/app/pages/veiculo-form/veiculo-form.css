@@ -14,6 +14,7 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   padding: 1.5rem;
+  pointer-events: auto;
 }
 
 .form-header {
