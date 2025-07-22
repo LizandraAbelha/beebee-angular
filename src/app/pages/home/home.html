@@ -1,47 +1,86 @@
-<div class="text-center">
-    <h2>Painel Principal</h2>
-    <p class="lead">O que você gostaria de fazer hoje?</p>
-</div>
 
-<div class="row mt-5 text-center">
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Procurar Carona</h5>
-                <p class="card-text">Veja a lista de caronas disponíveis para o seu trajeto.</p>
-                <a routerLink="/app/viagens" class="btn btn-primary mt-auto">Ver Caronas</a>
-            </div>
-        </div>
-    </div>
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Meus Veículos</h5>
-                <p class="card-text">Cadastre e gira os seus veículos para oferecer caronas.</p>
-                <a routerLink="/app/veiculos" class="btn btn-secondary mt-auto">Gerir Veículos</a>
-            </div>
-        </div>
-    </div>
 
-    @if (possuiVeiculos) {
-        <div class="col-md-4 mb-4">
-            <div class="card h-100">
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">Oferecer Carona</h5>
-                    <p class="card-text">Crie uma nova viagem e partilhe os seus lugares disponíveis.</p>
-                    <a routerLink="/app/viagens/nova" class="btn btn-success mt-auto">Criar Nova Viagem</a>
-                </div>
-            </div>
-        </div>
-    }
+<div class="home-container">
+  <div #map class="map-container"></div>
 
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">Meu Histórico</h5>
-                <p class="card-text">Veja o seu histórico de caronas e avaliações.</p>
-                <a routerLink="/app/historico" class="btn btn-info mt-auto">Ver Histórico</a>
-            </div>
+  @if (viagemEmDestaque && motoristaDoDestaque) {
+    <div class="ride-status-card">
+
+      <div class="status-col-left">
+        @if (motoristaDoDestaque.fotoUrl) {
+          <img [src]="environment.backendUrl + motoristaDoDestaque.fotoUrl" class="driver-pic" alt="Foto do Motorista">
+        } @else {
+          <div class="driver-pic-initials">
+            <span>{{ getIniciais(viagemEmDestaque.viagem.motoristaNome) }}</span>
+          </div>
+        }
+        <strong class="driver-name">{{ viagemEmDestaque.viagem.motoristaNome }}</strong>
+        @if (veiculoDoDestaque) {
+          <span class="vehicle-model">{{ veiculoDoDestaque.modelo }}</span>
+          <span class="vehicle-plate">{{ veiculoDoDestaque.placa }}</span>
+        }
+      </div>
+
+      <div class="status-col-right">
+        <div class="trip-details">
+          <div class="trip-info-item">
+            <img src="assets/icons/Beehive.png" alt="Origem">
+            <span>{{ viagemEmDestaque.viagem.origem }}</span>
+          </div>
+          <div class="trip-info-item">
+            <img src="assets/icons/Beehive.png" alt="Destino">
+            <span>{{ viagemEmDestaque.viagem.destino }}</span>
+          </div>
         </div>
+
+        <div class="departure-info">
+          Saída: <strong>{{ viagemEmDestaque.viagem.dataInicio | date:'dd/MM/yyyy' }}</strong> às <strong>{{ viagemEmDestaque.viagem.dataInicio | date:'HH:mm' }}</strong>
+        </div>
+
+        <div class="ride-actions">
+          @if (viagemEmDestaque.situacao === 'FINALIZADA') {
+            <a routerLink="/app/historico" class="btn btn-evaluate">Avaliar</a>
+          } @else {
+            <span class="status-text">Aguardando...</span>
+          }
+        </div>
+      </div>
+
     </div>
+  }
+
+  <div class="search-card">
+    <div class="card-header">
+      <h4>Aonde você irá?</h4>
+      @if (possuiVeiculos) {
+        <a routerLink="/app/viagens/nova" class="publish-link">Publicar</a>
+      }
+    </div>
+    <div class="card-body">
+      <form (ngSubmit)="procurarViagens()">
+
+        <div class="form-group">
+          <img src="assets/icons/Beehive.png" class="input-icon" alt="Ícone de partida">
+          <input type="text" class="form-control" name="origem" [(ngModel)]="filtroOrigem" placeholder="Seu local de partida">
+        </div>
+
+        <div class="form-group">
+          <img src="assets/icons/Beehive.png" class="input-icon" alt="Ícone de destino">
+          <input type="text" class="form-control" name="destino" [(ngModel)]="filtroDestino" placeholder="Digite o destino">
+        </div>
+
+        <div class="form-group">
+          <input type="text" placeholder="dd/mm/aaaa" class="form-control" onfocus="(this.type='date')" onblur="(this.type='text')" name="data" [(ngModel)]="filtroData">
+        </div>
+
+        <div class="d-grid form-footer">
+          @if (possuiVeiculos) {
+            <a routerLink="/app/viagens/nova" class="btn btn-primary btn-block">Oferecer Carona</a>
+          } @else {
+            <button type="submit" class="btn btn-primary btn-block">Buscar Carona</button>
+          }
+        </div>
+      </form>
+    </div>
+  </div>
 </div>

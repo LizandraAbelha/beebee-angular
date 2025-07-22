@@ -1,0 +1,141 @@
+:host(.sidebar-is-open) .menu-toggle-btn {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.8);
+}
+.menu-toggle-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1051;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s ease, opacity 0.3s ease;
+}
+.menu-toggle-btn:hover { transform: scale(1.1); }
+.menu-toggle-btn img {
+  width: 35px;
+  height: 35px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 300px;
+  height: 100%;
+  z-index: 1060;
+
+  background-color: rgba(254, 190, 1, 0.4);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+}
+.sidebar.open {
+  transform: translateX(0);
+}
+.sidebar-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1040;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.sidebar-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+.sidebar-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.sidebar-profile h3 {
+  font-family: 'Baloo 2', cursive;
+  color: #111;
+  font-size: 1.4rem;
+  font-weight: 500;
+  margin-top: 1rem;
+}
+.profile-pic,
+.profile-pic-initials {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 12px rgba(255, 0, 0, 0.18);
+}
+.profile-pic-initials {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: 600;
+  background-color: #FEBE01;
+  color: #333;
+}
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.sidebar-nav a {
+  color: #333;
+  text-decoration: none;
+  font-size: 1.1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  transition: color 0.2s ease;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+.sidebar-nav a:hover {
+  color: #000;
+}
+.sidebar-nav a.active {
+  font-weight: 600;
+  color: #000;
+}
+.btn-logout {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #333;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-align: left;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  border-radius: 8px;
+}
+.btn-logout:hover {
+  color: #DD1129;
+  font-weight: 600;
+}
+:host ::ng-deep router-outlet + *:not(app-home) {
+  display: block;
+  padding: 1.5rem;
+}
+

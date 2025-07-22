@@ -1,3 +1,5 @@
+import { Veiculo } from "./veiculo";
+
 export interface Viagem {
   id?: number;
   descricao: string;
@@ -9,4 +11,7 @@ export interface Viagem {
   motoristaId: number;
   motoristaNome?: string;
   mediaMotorista?: number;
+
+  placa?: Veiculo;
+  modelo?: Veiculo;
 }
