@@ -1,0 +1,57 @@
+<div class="container mt-5 d-flex justify-content-center">
+  <div class="card p-4 shadow" style="max-width: 500px; width: 100%;">
+    <h2 class="mb-4 text-center">Minha Conta</h2>
+
+    <!-- Modo visualização -->
+    <div *ngIf="!editando">
+      <p><strong>Nome:</strong> {{ aluno.nome }}</p>
+      <p><strong>CPF:</strong> {{ aluno.cpf }}</p>
+      <p><strong>Email:</strong> {{ aluno.email }}</p>
+      <p><strong>Login:</strong> {{ aluno.login }}</p>
+      <p><strong>Média Caronista:</strong> {{ aluno.mediaCaronista ?? 'N/A' }}</p>
+      <p *ngIf="aluno.mediaMotorista !== null && aluno.mediaMotorista !== undefined">
+        <strong>Média Motorista:</strong> {{ aluno.mediaMotorista }}
+      </p>
+
+      <button class="btn btn-primary w-100 mb-3" (click)="editar()">Editar</button>
+      <button (click)="deletar()" class="btn btn-danger w-100 mb-3">Deletar Conta</button>
+      <button [routerLink]="['/app/horarios']" class="btn btn-secondary w-100">Ver Horários Acadêmicos</button>
+    </div>
+
+    <!-- Modo edição -->
+    <form *ngIf="editando" (ngSubmit)="salvar()" #form="ngForm" novalidate>
+      <div class="mb-3">
+        <label for="nome" class="form-label">Nome:</label>
+        <input id="nome" type="text" class="form-control" [(ngModel)]="aluno.nome" name="nome" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="cpf" class="form-label">CPF:</label>
+        <input id="cpf" type="text" class="form-control" [(ngModel)]="aluno.cpf" name="cpf" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input id="email" type="email" class="form-control" [(ngModel)]="aluno.email" name="email" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="login" class="form-label">Login:</label>
+        <input id="login" type="text" class="form-control" [(ngModel)]="aluno.login" name="login" readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="senha" class="form-label">Senha:</label>
+        <input id="senha" type="password" class="form-control" [(ngModel)]="aluno.senha" name="senha" required>
+      </div>
+
+      <p><strong>Média Caronista:</strong> {{ aluno.mediaCaronista ?? 'N/A' }}</p>
+      <p *ngIf="aluno.mediaMotorista !== null && aluno.mediaMotorista !== undefined">
+        <strong>Média Motorista:</strong> {{ aluno.mediaMotorista }}
+      </p>
+
+      <button type="submit" class="btn btn-success w-100 mb-2" [disabled]="form.invalid">Salvar Alterações</button>
+      <button type="button" class="btn btn-secondary w-100" (click)="cancelar()">Cancelar</button>
+    </form>
+  </div>
+</div>

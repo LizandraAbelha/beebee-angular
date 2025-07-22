@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Aluno } from '../models/aluno'; 
 
 @Injectable({
   providedIn: 'root'
@@ -17,5 +18,16 @@ export class AlunoService {
   }
   login(credenciais: any): Observable<any> {
     return this.http.post('http://localhost:8080/alunos/autenticar', credenciais);
+  }
+    getById(id: number): Observable<Aluno> {
+    return this.http.get<Aluno>(`${this.apiUrl}/${id}`);
+  }
+
+  update(id: number, aluno: Aluno): Observable<Aluno> {
+    return this.http.put<Aluno>(`${this.apiUrl}/${id}`, aluno);
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 }

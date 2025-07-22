@@ -12,6 +12,8 @@ import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
 import { Historico } from './pages/historico/historico';
 import { HorarioAcademicoList } from './pages/horario-academico-list/horario-academico-list';
 import { HorarioAcademicoForm } from './pages/horario-academico-form/horario-academico-form';
+import { UsuarioComponent } from './pages/usuario/usuario';
+
 
 
 export const routes: Routes = [
@@ -37,6 +39,8 @@ export const routes: Routes = [
       { path: 'horarios', component: HorarioAcademicoList },
       { path: 'horarios/form', component: HorarioAcademicoForm },
       { path: 'horarios/form/:id', component: HorarioAcademicoForm },
+      { path: 'usuario', component: UsuarioComponent },
+
 
 
       { path: '', redirectTo: 'home', pathMatch: 'full' }
