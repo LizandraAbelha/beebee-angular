@@ -10,6 +10,7 @@ import { ViagemList } from './pages/viagem-list/viagem-list';
 import { ViagemDetail } from './pages/viagem-detail/viagem-detail';
 import { MinhasViagens} from './pages/minhas-viagens/minhas-viagens';
 import { Historico } from './pages/historico/historico';
+import { MeuPerfil } from './pages/meu-perfil/meu-perfil';
 
 export const routes: Routes = [
     { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -20,17 +21,18 @@ export const routes: Routes = [
     component: MainLayout,
     children: [
       { path: 'home', component: Home },
-
       { path: 'veiculos', component: VeiculoList },
-
       { path: 'veiculos/form', component: VeiculoForm },
       { path: 'veiculos/form/:id', component: VeiculoForm },
+
       { path: 'viagens', component: ViagemList },
       { path: 'viagens/nova', component: ViagemForm },
-      { path: 'viagens/:id', component: ViagemDetail },
-      { path: 'minhas-viagens', component: MinhasViagens },
       { path: 'viagens/editar/:id', component: ViagemForm },
+      { path: 'viagens/:id', component: ViagemDetail },
+
+      { path: 'minhas-viagens', component: MinhasViagens },
       { path: 'historico', component: Historico },
+      { path: 'meu-perfil', component: MeuPerfil },
 
       { path: '', redirectTo: 'home', pathMatch: 'full' }
     ]

@@ -5,11 +5,12 @@ import { ViagemService } from '../../services/viagem';
 import { ViagemAlunoService } from '../../services/viagem-aluno';
 import { Viagem } from '../../models/viagem';
 import { ViagemAluno } from '../../models/viagem-aluno';
+import { BeeRating } from '../../pages/bee-rating/bee-rating';
 
 @Component({
   selector: 'app-viagem-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, DatePipe],
+  imports: [CommonModule, RouterLink, DatePipe, BeeRating],
   templateUrl: './viagem-detail.html',
   styleUrl: './viagem-detail.css'
 })
@@ -30,16 +31,30 @@ export class ViagemDetail implements OnInit {
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
     const viagemId = this.route.snapshot.paramMap.get('id');
+
+    console.log('ID da Viagem na URL:', viagemId);
+
     if (viagemId) {
       this.carregarDetalhesViagem(Number(viagemId));
       this.carregarPedidos(Number(viagemId));
+    } else {
+      console.error('Nenhum ID de viagem encontrado na URL.');
+      alert('Não foi possível carregar a viagem. ID não encontrado.');
     }
   }
 
   carregarDetalhesViagem(id: number): void {
-    this.viagemService.getById(id).subscribe(data => {
-      this.viagem = data;
-      this.isMotorista = this.alunoLogadoId === this.viagem.motoristaId;
+    this.viagemService.getById(id).subscribe({
+      next: (data) => {
+        console.log('Dados da viagem recebidos:', data);
+        this.viagem = data;
+        this.isMotorista = this.alunoLogadoId === this.viagem.motoristaId;
+      },
+      error: (err) => {
+        console.error('Falha ao carregar detalhes da viagem:', err);
+        alert('Ocorreu um erro ao carregar os detalhes da viagem. Verifique a consola para mais informações.');
+        this.router.navigate(['/app/viagens']);
+      }
     });
   }
 

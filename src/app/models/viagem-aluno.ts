@@ -11,4 +11,5 @@ export interface ViagemAluno {
   alunoNome?: string;
   viagem: Viagem;
   avaliacao?: Avaliacao;
+  mediaCaronista?: number;
 }

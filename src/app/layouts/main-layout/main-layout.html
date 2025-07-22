@@ -15,12 +15,46 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/app/minhas-viagens" routerLinkActive="active">Minhas Caronas</a>
         </li>
-        </ul>
-      <span class="navbar-text me-3">
-        Olá, {{ nomeUsuario }}
-      </span>
-      <button (click)="logout()" class="btn btn-outline-light">Sair</button>
-    </div>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/app/historico" routerLinkActive="active">Histórico</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/app/meu-perfil" routerLinkActive="active">Meu Perfil</a>
+        </li>
+      </ul>
+
+      <div class="d-flex align-items-center">
+        <div class="dropdown">
+          <button class="btn btn-primary position-relative" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+            🔔
+            @if (unreadCount > 0) {
+              <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{ unreadCount }}
+              </span>
+            }
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton">
+            @if (notificacoes.length > 0) {
+              @for (notificacao of notificacoes; track notificacao.id) {
+                <li>
+                  <a class="dropdown-item" [class.fw-bold]="!notificacao.lida" (click)="navegarParaLink(notificacao)" style="cursor: pointer; max-width: 300px; white-space: normal;">
+                    <p class="mb-0 small">{{ notificacao.mensagem }}</p>
+                    <small class="text-muted">{{ notificacao.data | date:'dd/MM/yy HH:mm' }}</small>
+                  </a>
+                </li>
+              }
+            } @else {
+              <li><span class="dropdown-item-text">Nenhuma notificação</span></li>
+            }
+          </ul>
+        </div>
+
+        <span class="navbar-text ms-3 me-3">
+          Olá, {{ nomeUsuario }}
+        </span>
+        <button (click)="logout()" class="btn btn-outline-light">Sair</button>
+      </div>
+      </div>
   </div>
 </nav>
 

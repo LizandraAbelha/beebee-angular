@@ -19,7 +19,15 @@
             {{ viagem.situacao }}
           </span>
         </li>
-        <li class="list-group-item"><strong>Motorista:</strong> {{ viagem.motoristaNome }}</li>
+        <li class="list-group-item d-flex align-items-center">
+          <strong>Motorista:</strong>
+          <span class="ms-2">{{ viagem.motoristaNome }}</span>
+          @if(viagem.mediaMotorista && viagem.mediaMotorista > 0) {
+            <div class="ms-3">
+              <app-bee-rating [rating]="viagem.mediaMotorista"></app-bee-rating>
+            </div>
+          }
+        </li>
       </ul>
     </div>
 
@@ -30,6 +38,7 @@
           @if(viagem.situacao === 'PLANEJADA') {
             <button (click)="iniciarViagem()" class="btn btn-success btn-sm ms-2">Iniciar Viagem</button>
             <button (click)="cancelarViagem()" class="btn btn-danger btn-sm ms-2">Cancelar Viagem</button>
+            
             @if(pedidos.length === 0) {
               <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-outline-secondary btn-sm ms-2">Editar</a>
             }

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { VeiculoService } from '../../services/veiculo';
-import { Veiculo } from '../../models/veiculo'; // <-- Importa o nosso novo modelo
+import { Veiculo } from '../../models/veiculo';
 
 @Component({
   selector: 'app-veiculo-form',
