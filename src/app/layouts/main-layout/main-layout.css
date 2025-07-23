@@ -36,7 +36,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 280px;
+  width: 360px;
   height: 100%;
   z-index: 1060;
 
@@ -64,26 +64,25 @@
 }
 
 .profile-pic {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 0.5rem;
-  border: 2px solid #FEBE01;
+  border: 1px solid #FEBE01;
 }
 
 .profile-pic-initials {
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
-  background-color: #f1fafb;
+  background-color: #FEBE01;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Baloo 2', cursive;
   font-size: 2.2rem;
   font-weight: bold;
-  color: #FEBE01;
+  color: #000000;
   margin-bottom: 0.5rem;
 }
 
@@ -91,6 +90,8 @@
   font-family: 'Baloo 2', cursive;
   font-size: 1.4rem;
   margin: 0;
+  color: #000000;
+  font-weight: 600;
 }
 
 .sidebar-nav {
@@ -143,7 +144,7 @@
 }
 
 .btn-logout:hover {
-  background-color: #c82333;
+  background-color: #DD1129;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
