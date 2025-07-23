@@ -36,7 +36,14 @@
               <img src="assets/icons/Mail.png" alt="Ícone de Email" class="info-icon">
               <span class="info-text">{{ aluno.email }}</span>
             </div>
+            <div class="card-footer">
+              <button class="btn btn-outline-secondary" (click)="toggleEditMode()">Editar Perfil</button>
+              <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#alterarSenhaModal">
+                Alterar Senha
+              </button>
           </div>
+          </div>
+
         } @else {
           <form (ngSubmit)="salvarAlteracoes()" class="edit-form-section">
             <div class="form-field mb-3">
@@ -115,7 +122,6 @@
           </div>
         </div>
       </div>
-
 
     </div>
   } @else {

@@ -258,7 +258,6 @@ hr {
 .text-muted { font-size: 0.9rem; color: #a0aec0; }
 
 .card-footer {
-  background-color: #f7fafc;
   border-top: 1px solid #edf2f7;
   padding: 1rem;
   display: flex;
@@ -266,7 +265,7 @@ hr {
   justify-content: center;
 }
 
-.btn-footer-action {
+.btn-outline-secondary {
   background-color: #f0f0f0;
   color: #333;
   border-radius: 2rem;
@@ -277,7 +276,7 @@ hr {
   display: inline-block;
   transition: background-color 0.2s ease;
 }
-.btn-footer-action:hover {
+.btn-outline-secondary:hover {
   background-color: #5a6268;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
