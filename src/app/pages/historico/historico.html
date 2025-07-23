@@ -35,12 +35,11 @@
                 </div>
               } @else {
                 <button (click)="abrirModalAvaliacao(item, 'motorista')"
-                        data-bs-toggle="modal" data-bs-target="#avaliacaoModal"
                         class="btn btn-avaliar">Avaliar Motorista</button>
               }
             </div>
           }
-          </div>
+        </div>
       }
     } @else {
       <div class="header-title-group2">
@@ -60,18 +59,7 @@
       @for (viagem of historicoMotorista; track viagem.id) {
         <div class="historico-card">
           <div class="historico-card-body">
-            <div class="card-details">
-              <h5 class="card-route">{{ viagem.origem }} → {{ viagem.destino }}</h5>
-              <p class="card-info">Início: {{ viagem.dataInicio | date:'dd/MM/yyyy HH:mm' }}</p>
-              @if (viagem.dataFim) {
-                <p class="card-info">Finalizada em: {{ viagem.dataFim | date:'dd/MM/yyyy HH:mm' }}</p>
-              }
-              <span class="badge" [ngClass]="{
-                'status-finalizada': viagem.situacao === 'FINALIZADA',
-                'status-cancelada': viagem.situacao === 'CANCELADA'
-              }">{{ viagem.situacao }}</span>
             </div>
-          </div>
           @if (viagem.situacao === 'FINALIZADA' && viagem.passageiros && viagem.passageiros.length > 0) {
             <div class="historico-card-footer2">
               <h6>Avalie os passageiros desta viagem:</h6>
@@ -83,7 +71,6 @@
                       <app-bee-rating [rating]="passageiro.avaliacao.notaCaronista"></app-bee-rating>
                     } @else {
                       <button (click)="abrirModalAvaliacao(passageiro, 'passageiro')"
-                              data-bs-toggle="modal" data-bs-target="#avaliacaoModal"
                               class="btn btn-avaliar-sm">Avaliar</button>
                     }
                   </li>
@@ -113,8 +100,7 @@
             <div class="star-rating">
               @for (star of [5, 4, 3, 2, 1]; track star) {
                 <input type="radio" [id]="'star'+star" name="rating" [value]="star"
-                      [ngModel]="roleAvaliacao === 'motorista' ? avaliacaoParaEnviar.notaMotorista : avaliacaoParaEnviar.notaCaronista"
-                      (ngModelChange)="$event && (roleAvaliacao === 'motorista' ? avaliacaoParaEnviar.notaMotorista = $event : avaliacaoParaEnviar.notaCaronista = $event)">
+                      [(ngModel)]="avaliacaoParaEnviar[roleAvaliacao === 'motorista' ? 'notaMotorista' : 'notaCaronista']">
                 <label [for]="'star'+star" title="{{star}} estrelas">&#9733;</label>
               }
             </div>
@@ -122,8 +108,7 @@
           <div class="mb-3">
             <label for="comentario" class="form-label">Comentário (Opcional)</label>
             <textarea class="form-control" id="comentario" name="comentario"
-                      [ngModel]="roleAvaliacao === 'motorista' ? avaliacaoParaEnviar.comentarioMotorista : avaliacaoParaEnviar.comentarioCaronista"
-                      (ngModelChange)="$event && (roleAvaliacao === 'motorista' ? avaliacaoParaEnviar.comentarioMotorista = $event : avaliacaoParaEnviar.comentarioCaronista = $event)"
+                      [(ngModel)]="avaliacaoParaEnviar[roleAvaliacao === 'motorista' ? 'comentarioMotorista' : 'comentarioCaronista']"
                       rows="4" maxlength="500"></textarea>
           </div>
         </form>
