@@ -7,30 +7,14 @@
 
     <form (ngSubmit)="salvar()" #form="ngForm" novalidate>
       <div class="form-group">
-        <input
-          id="descricao"
-          name="descricao"
-          type="text"
-          [(ngModel)]="horario.descricao"
-          class="form-control"
-          required
-          placeholder="Ex: Cálculo I"
-          #descricao="ngModel"
-        />
+        <input id="descricao" name="descricao" type="text" [(ngModel)]="horario.descricao" class="form-control" required placeholder="Ex: Cálculo I" #descricao="ngModel"/>
         <div class="text-danger" *ngIf="descricao.invalid && descricao.touched">
           Descrição é obrigatória *
         </div>
       </div>
 
       <div class="form-group">
-        <select
-          id="dia"
-          name="dia"
-          [(ngModel)]="horario.dia"
-          class="form-select"
-          required
-          #dia="ngModel"
-        >
+        <select id="dia" name="dia" [(ngModel)]="horario.dia" class="form-select" required #dia="ngModel">
           <option value="" disabled selected>Selecione o dia</option>
           <option value="SEGUNDA">Segunda-feira</option>
           <option value="TERCA">Terça-feira</option>
@@ -45,37 +29,18 @@
       </div>
 
       <div class="form-group">
-        <input
-          id="horario"
-          name="horario"
-          type="time"
-          [(ngModel)]="horario.horario"
-          class="form-control"
-          required
-          #horarioModel="ngModel"
-        />
+        <input id="horario" name="horario" type="time" [(ngModel)]="horario.horario" class="form-control" required #horarioModel="ngModel"/>
         <div class="text-danger" *ngIf="horarioModel.invalid && horarioModel.touched">
           Informe o horário *
         </div>
       </div>
 
       <div class="form-group">
-        <input
-          id="situacao"
-          name="situacao"
-          type="text"
-          [(ngModel)]="horario.situacao"
-          class="form-control"
-          placeholder="Ex: Ativa, Trancada, Cancelada"
-        />
+        <input id="situacao" name="situacao" type="text" [(ngModel)]="horario.situacao" class="form-control" placeholder="Ex: Ativa, Trancada, Cancelada"/>
       </div>
 
       <div class="form-actions">
-        <button
-          type="submit"
-          class="btn btn-primary"
-          [disabled]="form.invalid"
-        >
+        <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
           {{ isEditMode ? 'Atualizar' : 'Salvar' }}
         </button>
         <a routerLink="/app/horarios" class="btn btn-cancelar">Cancelar</a>

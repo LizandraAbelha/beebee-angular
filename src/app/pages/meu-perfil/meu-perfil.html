@@ -38,9 +38,6 @@
             </div>
             <div class="card-footer">
               <button class="btn btn-outline-secondary" (click)="toggleEditMode()">Editar Perfil</button>
-              <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#alterarSenhaModal">
-                Alterar Senha
-              </button>
           </div>
           </div>
 
@@ -55,7 +52,9 @@
               <input type="email" class="form-control" id="email" name="email" [(ngModel)]="alunoEdit.email">
             </div>
             <div class="form-actions-edit">
-              <button type="submit" class="btn btn-save">Salvar Alterações</button>
+              <button type="submit" class="btn btn-primary">
+                {{ isEditMode ? 'Atualizar' : 'Salvar' }}
+              </button>
               <button type="button" (click)="cancelarEdicao()" class="btn btn-cancel">Cancelar</button>
             </div>
           </form>
@@ -127,7 +126,4 @@
   } @else {
     <p>A carregar dados do perfil...</p>
   }
-</div>
-
-<div class="modal fade" id="alterarSenhaModal" #alterarSenhaModal tabindex="-1" aria-labelledby="alterarSenhaModalLabel" aria-hidden="true">
 </div>

@@ -227,7 +227,7 @@ main {
 .notification-item p {
   font-size: 0.9rem;
   margin-bottom: 0.25rem !important;
-  white-space: normal; 
+  white-space: normal;
 }
 
 .notification-item small {

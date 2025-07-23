@@ -1,17 +1,13 @@
 .horario-form-container {
-  padding: 20px;
-  min-height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
-  box-sizing: border-box;
-  justify-content: center;
   display: flex;
   align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #ffffff;
 }
-
 .horario-form-card {
   width: 100%;
   max-width: 450px;
@@ -28,67 +24,39 @@
   text-align: center;
   margin-bottom: 2rem;
 }
-
 .form-header img.logo-img {
   max-width: 120px;
   height: auto;
   margin-bottom: 0.5rem;
 }
-
 .form-header h2 {
   font-family: 'Baloo 2', cursive;
-  font-weight: 600;
-  font-size: 2.2rem;
+  font-size: 2rem;
+  font-weight: regular;
   color: #111111;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
 }
-
 .form-group {
   margin-bottom: 1.75rem;
   position: relative;
 }
-
-.form-group label {
-  display: block;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: #4a5568;
-}
-
-.required {
-  color: #DD1129;
-  margin-left: 0.15rem;
-}
-
 .form-control,
 .form-select {
-  width: 100%;
-  height: 50px;
   padding: 0 1.5rem;
   border: 1px solid #D1D1D1;
   border-radius: 2rem;
-  font-size: 1rem;
-  transition: all 0.2s ease-in-out;
+  height: 50px;
+  font-size: 14px;
 }
-
 .form-control::placeholder {
   color: #A5A5A5;
+  opacity: 1;
 }
-
 .form-control:focus,
 .form-select:focus {
-  outline: none;
   border-color: #FEBE01;
-  box-shadow: 0 0 0 4px rgba(254, 190, 1, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(254, 190, 1, 0.25);
 }
-
-.error-msg {
-  color: #DD1129;
-  font-size: 0.85rem;
-  margin-top: 0.4rem;
-  padding-left: 1.5rem;
-}
-
 .form-actions {
   display: flex;
   gap: 1rem;
@@ -98,45 +66,49 @@
 .btn {
   flex: 1;
   cursor: pointer;
-  font-weight: 600;
-  font-family: 'Baloo 2', cursive;
-  padding: 0.8rem;
-  border-radius: 2rem;
-  font-size: 1.1rem;
-  border: none;
-  transition: all 0.2s ease-in-out;
   text-decoration: none;
   text-align: center;
 }
-
 .btn-primary {
   background-color: #FEBE01;
-  color: #111111;
+  border-color: #FEBE01;
+  color: #000000;
+  font-weight: 600;
+  font-family: 'Baloo 2', cursive;
+  padding: 0.75rem;
+  border-radius: 2rem;
+  transition: all 0.2s ease-in-out;
 }
-
 .btn-primary:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(254, 190, 1, 0.4);
 }
-
 .btn-primary:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
 }
-
 .btn-cancelar {
   background-color: #DD1129;
+  border-color: #DD1129;
   color: #ffffff;
+  font-weight: 600;
+  font-family: 'Baloo 2', cursive;
+  padding: 0.75rem;
+  border-radius: 2rem;
+  transition: all 0.2s ease-in-out;
 }
-
 .btn-cancelar:hover {
-  background-color: #DD1129;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .text-danger {
   text-align: center;
+  display: block;
+}
+.form-field + .text-danger {
+    margin-top: -0.75rem;
+    margin-bottom: 1rem;
 }

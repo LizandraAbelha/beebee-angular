@@ -26,10 +26,11 @@
           <label for="cor" class="form-label visually-hidden">Cor</label>
           <input type="text" class="form-control" id="cor" name="cor" [(ngModel)]="veiculo.cor" required placeholder="Cor do Veículo">
         </div>
-        <div class="d-grid gap-2">
+        <div class="form-actions">
           <button type="submit" class="btn btn-primary" [disabled]="veiculoForm.invalid">{{ isEditMode ? 'Atualizar' : 'Salvar' }}</button>
           <button type="button" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
         </div>
+
       </form>
     </div>
   </div>

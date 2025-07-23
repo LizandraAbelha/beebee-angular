@@ -39,8 +39,8 @@
           <textarea class="form-control" id="descricao" name="descricao" rows="3" [(ngModel)]="viagem.descricao" placeholder="Detalhes adicionais da viagem..."></textarea>
         </div>
 
-        <div class="d-grid gap-2">
-          <button type="submit" class="btn btn-primary" [disabled]="viagemForm.invalid">Salvar Viagem</button>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" [disabled]="viagemForm.invalid">Publicar</button>
           <a routerLink="/app/minhas-viagens" class="btn btn-secondary">Cancelar</a>
         </div>
       </form>

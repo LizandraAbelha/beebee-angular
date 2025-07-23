@@ -9,7 +9,7 @@ import { HorarioAcademico } from '../../models/horario-academico';
   selector: 'app-horario-academico-form',
   standalone: true,
   imports: [CommonModule, FormsModule, RouterLink],
-  styleUrls: ['./horario-academico-form.css'],  // ajustado para o CSS do form
+  styleUrls: ['./horario-academico-form.css'],
   templateUrl: './horario-academico-form.html'
 })
 export class HorarioAcademicoForm implements OnInit {
@@ -22,7 +22,7 @@ export class HorarioAcademicoForm implements OnInit {
   };
 
   isEditMode = false;
-  isSaving = false;  // controle para desabilitar botão ao salvar
+  isSaving = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,7 +42,7 @@ export class HorarioAcademicoForm implements OnInit {
   }
 
   salvar(): void {
-    if (this.isSaving) return; // evita múltiplos cliques
+    if (this.isSaving) return;
     this.isSaving = true;
 
     if (this.isEditMode && this.horario.id) {

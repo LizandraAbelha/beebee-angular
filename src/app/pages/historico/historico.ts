@@ -1,7 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ViagemAluno } from '../../models/viagem-aluno';
 import { Viagem } from '../../models/viagem';
 import { ViagemAlunoService } from '../../services/viagem-aluno';

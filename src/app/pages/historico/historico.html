@@ -59,6 +59,17 @@
       @for (viagem of historicoMotorista; track viagem.id) {
         <div class="historico-card">
           <div class="historico-card-body">
+            <div class="card-details">
+              <h5 class="card-route">{{ viagem.origem }} → {{ viagem.destino }}</h5>
+              <p class="card-info">Início: {{ viagem.dataInicio | date:'dd/MM/yyyy HH:mm' }}</p>
+              @if (viagem.dataFim) {
+                <p class="card-info">Finalizada em: {{ viagem.dataFim | date:'dd/MM/yyyy HH:mm' }}</p>
+              }
+              <span class="badge" [ngClass]="{
+                'status-finalizada': viagem.situacao === 'FINALIZADA',
+                'status-cancelada': viagem.situacao === 'CANCELADA'
+              }">{{ viagem.situacao }}</span>
+            </div>
             </div>
           @if (viagem.situacao === 'FINALIZADA' && viagem.passageiros && viagem.passageiros.length > 0) {
             <div class="historico-card-footer2">
@@ -80,6 +91,14 @@
           }
         </div>
       }
+    } @else {
+      <div class="header-title-group2">
+        <img src="assets/icons/Bee.png" alt="Ícone de Caronista">
+        <h4 class="section-title">Como Motorista</h4>
+      </div>
+      <div class="alert alert-info">
+        <p class="mb-0">Você ainda não publicou nenhuma viagem.</p>
+      </div>
     }
   </div>
 </div>

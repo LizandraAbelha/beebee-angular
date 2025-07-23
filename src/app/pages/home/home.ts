@@ -10,7 +10,6 @@ import { Aluno } from '../../models/aluno';
 import { AlunoService } from '../../services/aluno';
 import { Veiculo } from '../../models/veiculo';
 import { AvaliacaoService } from '../../services/avaliacao';
-import { Avaliacao } from '../../models/avaliacao';
 import { forkJoin, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import maplibregl from 'maplibre-gl';
@@ -71,7 +70,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
 
         const avaliacaoObservables = viagensFinalizadas.map(viagem =>
           this.avaliacaoService.getByViagemAlunoId(viagem.id!).pipe(
-            // A CORREÇÃO ESTÁ AQUI: trocamos of(null) por of(undefined)
             catchError(() => of(undefined)),
             map(avaliacao => ({ ...viagem, avaliacao: avaliacao }))
           )
@@ -82,7 +80,6 @@ export class Home implements OnInit, OnDestroy, AfterViewInit {
             !v.avaliacao || v.avaliacao.notaMotorista == null
           );
 
-          // O tipo de 'viagemParaAvaliar' agora é compatível com 'ViagemAluno | null'
           this.viagemEmDestaque = viagemParaAvaliar || null;
           this.carregarDetalhesDestaque();
         });
