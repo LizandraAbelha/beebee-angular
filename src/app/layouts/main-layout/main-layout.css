@@ -172,6 +172,21 @@ main {
   pointer-events: none;
 }
 
+.footer-logo-container {
+  position: fixed;
+  bottom: 0px;
+  left: 5%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.footer-logo {
+  height: 40px;
+  width: auto;
+  opacity: 0.8;
+}
+
 :host ::ng-deep router-outlet + * {
   display: flex;
   flex-direction: column;
@@ -179,6 +194,12 @@ main {
   padding: 0;
   overflow-y: auto;
   background-color: transparent;
+}
+:host-context(body.modal-open) {
+  main {
+    pointer-events: auto;
+    z-index: 10500 !important;
+  }
 }
 
 @media (max-width: 768px) {

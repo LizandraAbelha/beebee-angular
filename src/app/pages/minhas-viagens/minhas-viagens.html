@@ -4,11 +4,12 @@
       <h2>Minhas Caronas</h2>
     </div>
     <hr>
-    <div class="header-title-group">
-      <img src="assets/icons/Bee.png" alt="Ícone de Motorista">
-      <h4>Minhas viagens como Motorista</h4>
-    </div>
+
     @if (isMotorista) {
+      <div class="header-title-group">
+        <img src="assets/icons/Bee.png" alt="Ícone de Motorista">
+        <h4>Minhas viagens como Motorista</h4>
+      </div>
       @if (viagensComoMotorista.length > 0) {
         <div class="viagem-cards-container">
           @for(viagem of viagensComoMotorista; track viagem.id) {
