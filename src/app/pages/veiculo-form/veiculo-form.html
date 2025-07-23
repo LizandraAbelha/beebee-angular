@@ -21,7 +21,7 @@
         </div>
         <div class="d-grid gap-2">
           <button type="submit" class="btn btn-primary">{{ isEditMode ? 'Atualizar' : 'Salvar' }}</button>
-          <a routerLink="/app/home" class="btn btn-secondary">Cancelar</a>
+          <button type="button" (click)="cancelar()" class="btn btn-secondary">Cancelar</button>
         </div>
       </form>
     </div>

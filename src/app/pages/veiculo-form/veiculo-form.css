@@ -1,6 +1,5 @@
 .veiculo-form-container {
   padding: 20px;
-  background-color: #ffffff;
   min-height: 100vh;
   width: 100vw;
   position: absolute;
@@ -88,3 +87,4 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+

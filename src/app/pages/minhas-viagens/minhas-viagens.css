@@ -9,12 +9,10 @@ html, body {
 }
 
 .main-container {
-  background-color: #ffffff;
   min-height: 100vh;
   width: 100%;
   box-sizing: border-box;
   padding: 2rem 0;
-  pointer-events: auto;
 }
 
 .viagem-list-container {
@@ -27,6 +25,7 @@ html, body {
   box-shadow: 0 8px 20px rgba(0,0,0,0.05);
   font-family: 'Poppins', sans-serif;
   box-sizing: border-box;
+  pointer-events: auto;
 }
 
 .header-section {
@@ -46,7 +45,13 @@ html, body {
   text-align: center;
 }
 
-.header-title-group h2 {
+.header-title-group, .header-title-group2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-title-group h2, .header-title-group2 h2 {
   font-family: 'Baloo 2', cursive;
   font-size: 2.5rem;
   font-weight: 300;
@@ -55,36 +60,23 @@ html, body {
   flex-grow: 1;
   text-align: center;
 }
-.header-title-group {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+
 .header-title-group img {
   width: 60px;
   height: 60px;
   object-fit: contain;
 }
 
-.header-title-group2 h2 {
-  font-family: 'Baloo 2', cursive;
-  font-size: 2.5rem;
-  font-weight: 300;
-  color: #111111;
-  margin-top: 0;
-  flex-grow: 1;
-  text-align: center;
-}
-.header-title-group2 {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
 .header-title-group2 img {
   width: 50px;
   height: 50px;
   object-fit: contain;
 }
+
+.header-title-group2 {
+  margin-top: 3rem;
+}
+
 
 .viagem-list-container h4 {
   font-family: 'Baloo 2', cursive;

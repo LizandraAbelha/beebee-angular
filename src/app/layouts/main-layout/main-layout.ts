@@ -25,6 +25,7 @@ export class MainLayout implements OnInit, OnDestroy, AfterViewInit {
   unreadCount: number = 0;
   private notificacaoSubscription!: Subscription;
   private sidebarSubscription!: Subscription;
+  private veiculoSubscription!: Subscription;
   isSidebarOpen = false;
   hasVehicles: boolean = false;
 
@@ -45,6 +46,10 @@ export class MainLayout implements OnInit, OnDestroy, AfterViewInit {
       this.isSidebarOpen = !this.isSidebarOpen;
     });
 
+    this.veiculoSubscription = this.veiculoService.possuiVeiculos$.subscribe(possui => {
+      this.hasVehicles = possui;
+    });
+
     const id = localStorage.getItem('aluno_id');
     if (id) {
       const alunoId = Number(id);
@@ -55,7 +60,7 @@ export class MainLayout implements OnInit, OnDestroy, AfterViewInit {
       this.notificacaoSubscription = interval(30000).subscribe(() => {
         this.carregarNotificacoes(alunoId);
       });
-      this.checkUserVehicles(alunoId);
+      this.veiculoService.verificarVeiculos(alunoId).subscribe();
     }
   }
 
@@ -69,6 +74,9 @@ export class MainLayout implements OnInit, OnDestroy, AfterViewInit {
     }
     if (this.sidebarSubscription) {
       this.sidebarSubscription.unsubscribe();
+    }
+    if (this.veiculoSubscription) {
+      this.veiculoSubscription.unsubscribe();
     }
     if (this.map) {
       this.map.remove();
