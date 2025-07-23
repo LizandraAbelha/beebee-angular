@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule, DatePipe } from '@angular/common';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ViagemService } from '../../services/viagem';
@@ -6,20 +6,26 @@ import { ViagemAlunoService } from '../../services/viagem-aluno';
 import { Viagem } from '../../models/viagem';
 import { ViagemAluno } from '../../models/viagem-aluno';
 import { BeeRating } from '../../pages/bee-rating/bee-rating';
+import { FormsModule } from '@angular/forms';
+
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-viagem-detail',
   standalone: true,
-  imports: [CommonModule, RouterLink, DatePipe, BeeRating],
+  imports: [CommonModule, RouterLink, DatePipe, BeeRating, FormsModule],
   templateUrl: './viagem-detail.html',
   styleUrl: './viagem-detail.css'
 })
 export class ViagemDetail implements OnInit {
+  @ViewChild('solicitacaoModal') solicitacaoModal!: ElementRef;
+
   viagem: Viagem | null = null;
   alunoLogadoId: number = 0;
   pedidos: ViagemAluno[] = [];
   isMotorista: boolean = false;
   minhaSolicitacao: ViagemAluno | undefined = undefined;
+  observacaoSolicitacao: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -31,8 +37,6 @@ export class ViagemDetail implements OnInit {
   ngOnInit(): void {
     this.alunoLogadoId = Number(localStorage.getItem('aluno_id'));
     const viagemId = this.route.snapshot.paramMap.get('id');
-
-    console.log('ID da Viagem na URL:', viagemId);
 
     if (viagemId) {
       this.carregarDetalhesViagem(Number(viagemId));
@@ -136,13 +140,17 @@ export class ViagemDetail implements OnInit {
     const novaSolicitacao: Partial<ViagemAluno> = {
       situacao: 'SOLICITADA',
       alunoId: this.alunoLogadoId,
-      viagem: this.viagem
+      viagem: this.viagem,
+      observacao: this.observacaoSolicitacao
     };
 
     this.viagemAlunoService.solicitar(novaSolicitacao).subscribe({
       next: () => {
         alert('Participação solicitada com sucesso!');
+        const modal = bootstrap.Modal.getInstance(this.solicitacaoModal.nativeElement);
+        modal.hide();
         this.carregarPedidos(this.viagem!.id!);
+        this.observacaoSolicitacao = '';
       },
       error: (err) => {
         console.error('Erro ao solicitar participação:', err);
