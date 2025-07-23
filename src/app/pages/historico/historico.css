@@ -200,9 +200,31 @@ html, body {
 }
 
 #avaliacaoModal {
-  z-index: 9999 !important;
+  z-index: 10550 !important;
   pointer-events: auto !important;
   position: fixed !important;
+}
+
+.modal-backdrop {
+  z-index: 10500 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+body.modal-open #global-map-background {
+  display: none !important;
+}
+
+body.modal-open main {
+  pointer-events: auto !important;
+  z-index: 10490 !important;
+  position: relative !important;
+}
+
+#global-map-background,
+.map-overlay,
+.leaflet-container {
+  z-index: 0 !important;
+  pointer-events: none !important;
 }
 
 .modal-content {
@@ -236,16 +258,24 @@ html, body {
   justify-content: center;
   font-size: 2rem;
 }
-.star-rating input { display: none; }
+.star-rating input {
+  display: none;
+}
 .star-rating label {
-  color: #ddd;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-image: url('/assets/icons/Crown.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   cursor: pointer;
-  transition: color 0.2s;
+  transition: background-image 0.2s ease-in-out;
 }
 .star-rating input:checked ~ label,
 .star-rating label:hover,
 .star-rating label:hover ~ label {
-  color: #FEBE01;
+  background-image: url('/assets/icons/big-star-fill.png');
 }
 
 .alert {

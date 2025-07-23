@@ -101,7 +101,7 @@
               @for (star of [5, 4, 3, 2, 1]; track star) {
                 <input type="radio" [id]="'star'+star" name="rating" [value]="star"
                       [(ngModel)]="avaliacaoParaEnviar[roleAvaliacao === 'motorista' ? 'notaMotorista' : 'notaCaronista']">
-                <label [for]="'star'+star" title="{{star}} estrelas">&#9733;</label>
+                <label [for]="'star'+star" title="{{star}} estrelas"></label>
               }
             </div>
           </div>
