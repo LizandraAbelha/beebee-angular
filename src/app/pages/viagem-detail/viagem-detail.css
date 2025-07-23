@@ -76,20 +76,27 @@ html, body {
   color: #333;
   margin-top: 1.5rem;
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .viagem-detail-wrapper .card-text {
     font-size: 1rem;
-    color: #666;
     margin-bottom: 1.5rem;
 }
 
 .viagem-detail-wrapper .list-group-item {
   border-color: #eee;
-  padding: 0.8rem 0;
+  padding: 1rem 1.5rem;
   background-color: transparent;
   font-size: 1rem;
   color: #333;
+}
+
+.viagem-detail-wrapper .action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
 }
 
 .viagem-detail-wrapper .list-group-item strong {
@@ -128,7 +135,6 @@ html, body {
   color: #0c5460 !important;
 }
 
-
 .viagem-detail-wrapper .alert {
   padding: 1rem;
   margin-bottom: 1rem;
@@ -147,9 +153,9 @@ html, body {
     border-color: #c3e6cb;
 }
 .viagem-detail-wrapper .alert.alert-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border-color: #bee5eb;
+    color: #000000;
+    background-color: rgba(254, 190, 1, 0.4);
+    border-color:rgba(254, 190, 1, 0.4);
 }
 .viagem-detail-wrapper .alert.alert-danger {
     background-color: #f8d7da;
@@ -182,8 +188,8 @@ html, body {
 .viagem-detail-wrapper .btn-primary:hover,
 .viagem-detail-wrapper .btn-success:hover,
 .viagem-detail-wrapper .btn-info:hover {
-  background-color: #e6b300;
-  border-color: #e6b300;
+  background-color: #FEBE01;
+  border-color: #FEBE01;
   transform: translateY(-1px);
   box-shadow: 0 4px 10px rgba(254, 190, 1, 0.3);
 }
@@ -193,41 +199,75 @@ html, body {
   border-color: #dc3545;
   color: #ffffff;
   font-weight: 500;
-  font-family: 'Poppins', sans-serif;
   padding: 0.5rem 1rem;
   border-radius: 2rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 .viagem-detail-wrapper .btn-danger:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
+.viagem-detail-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+}
+.viagem-detail-actions .btn {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  border-radius: 2rem;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+.viagem-detail-actions .btn-cancelar {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  color: #ffffff;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+.viagem-detail-actions .btn-cancelar:hover {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
+.viagem-detail-actions .btn-editar {
+  background-color: #f0f0f0;
+  color: #333;
+  border-radius: 2rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s ease;
+}
+.viagem-detail-actions .btn-editar:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+  color: #ffffff;
+}
 
-.viagem-detail-wrapper .btn-secondary {
-    background-color: #D1D1D1;
-    border-color: #D1D1D1;
-    color: #2C302E;
+.btn-secondary {
+  background-color: #6c757d;
+  border-color: #6c757d;
+  color: #ffffff;
 }
-.viagem-detail-wrapper .btn-secondary:hover {
-    background-color: #D1D1D1;
-    border-color: #D1D1D1;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+.btn-secondary:hover {
+  background-color: #5a6268;
+  border-color: #545b62;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
 }
-
-.viagem-detail-wrapper .btn-outline-secondary {
-    background-color: transparent;
-    color: #D1D1D1;
-    border: 1px solid #D1D1D1;
-    color: #2C302E;
-}
-.viagem-detail-wrapper .btn-outline-secondary:hover {
-    background-color: #D1D1D1;
-    color: #2C302E;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
-}
-
 
 @media (max-width: 768px) {
   .viagem-detail-wrapper {

@@ -126,19 +126,21 @@
 }
 
 .btn-secondary {
-  background-color: #FEBE01;
-  border-color: #FEBE01;
-  color: #ffffff;
-  font-weight: 500;
-  font-family: 'Poppins', sans-serif;
-  padding: 0.5rem 1rem;
+  background-color: #f0f0f0;
+  color: #333;
   border-radius: 2rem;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  font-size: 0.9rem;
+  display: inline-block;
+  transition: background-color 0.2s ease;
 }
-
 .btn-secondary:hover {
+  background-color: #5a6268;
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(254, 190, 1, 0.4);
+  box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
+  color: #ffffff;
 }
 
 .btn-danger {

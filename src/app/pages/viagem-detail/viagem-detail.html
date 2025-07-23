@@ -1,5 +1,6 @@
 <div class="main-container">
-  <div class="viagem-detail-wrapper"> @if (viagem) {
+  <div class="viagem-detail-wrapper">
+    @if (viagem) {
       <div class="card mt-4">
         <div class="card-header">
           <div class="header-title-group">
@@ -36,26 +37,16 @@
 
         <div class="card-footer">
           @if (isMotorista) {
-            <div class="mb-3">
-              <strong>Ações da Viagem:</strong>
-              @if(viagem.situacao === 'PLANEJADA') {
-                <button (click)="iniciarViagem()" class="btn btn-success btn-sm ms-2">Iniciar Viagem</button>
-              }
-              @if(viagem.situacao === 'EM_ANDAMENTO') {
-                <button (click)="encerrarViagem()" class="btn btn-primary btn-sm ms-2">Encerrar Viagem</button>
-              }
-            </div>
-            <hr>
             <h5>Pedidos de Participação</h5>
             @if(pedidos.length > 0) {
               <ul class="list-group">
                 @for(pedido of pedidos; track pedido.id) {
                   <li class="list-group-item d-flex justify-content-between align-items-center">
                     <span>Caronista: <strong>{{ pedido.alunoNome }}</strong> - Status: <strong>{{ pedido.situacao }}</strong></span>
-                    <div>
+                    <div class="action-buttons">
                       @if(pedido.situacao === 'SOLICITADA') {
                         <button (click)="gerirPedido(pedido, 'CONFIRMADA')" class="btn btn-sm btn-success">Aprovar</button>
-                        <button (click)="gerirPedido(pedido, 'RECUSADA')" class="btn btn-sm btn-danger ms-2">Recusar</button>
+                        <button (click)="gerirPedido(pedido, 'RECUSADA')" class="btn btn-sm btn-danger">Recusar</button>
                       }
                       @if(pedido.situacao === 'CONFIRMADA' && viagem.situacao === 'EM_ANDAMENTO') {
                         <button (click)="finalizarCaronaPassageiro(pedido)" class="btn btn-sm btn-info">Finalizar Carona</button>
@@ -67,11 +58,23 @@
             } @else {
               <p class="text-muted">Nenhum pedido de participação para esta viagem ainda.</p>
             }
-            <button (click)="cancelarViagem()" class="btn btn-danger btn-sm ms-2">Cancelar</button>
-            @if(pedidos.length === 0) {
-              <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-outline-secondary btn-sm ms-2">Editar</a>
-            }
-          } @else {
+
+            <div class="viagem-detail-actions">
+              @if(viagem.situacao === 'PLANEJADA') {
+                <button (click)="iniciarViagem()" class="btn btn-success">Iniciar Viagem</button>
+              }
+              @if(viagem.situacao === 'EM_ANDAMENTO') {
+                <button (click)="encerrarViagem()" class="btn btn-success">Encerrar Viagem</button>
+              }
+
+              @if(viagem.situacao === 'PLANEJADA' || viagem.situacao === 'EM_ANDAMENTO') {
+                <button (click)="cancelarViagem()" class="btn btn-cancelar">Cancelar Viagem</button>
+              }
+              @if(pedidos.length === 0 && viagem.situacao === 'PLANEJADA') {
+                <a [routerLink]="['/app/viagens/editar', viagem.id]" class="btn btn-editar">Editar</a>
+              }
+            </div>
+            } @else {
             <div class="d-flex justify-content-between align-items-center">
               <div>
                 @if (minhaSolicitacao) {
