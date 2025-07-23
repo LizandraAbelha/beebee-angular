@@ -37,8 +37,11 @@
               <span class="info-text">{{ aluno.email }}</span>
             </div>
             <div class="card-footer">
-              <button class="btn btn-outline-secondary" (click)="toggleEditMode()">Editar Perfil</button>
-          </div>
+                <button class="btn btn-outline-secondary" (click)="toggleEditMode()">Editar Perfil</button>
+                <button class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#alterarSenhaModal">
+                    Alterar Senha
+                </button>
+            </div>
           </div>
 
         } @else {
@@ -126,4 +129,35 @@
   } @else {
     <p>A carregar dados do perfil...</p>
   }
+</div>
+
+<div class="modal fade" #alterarSenhaModal id="alterarSenhaModal" tabindex="-1" aria-labelledby="alterarSenhaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="alterarSenhaModalLabel">Alterar Senha</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="salvarNovaSenha()" id="form-alterar-senha">
+          <div class="form-field">
+            <img src="assets/icons/Lock.png" alt="Ícone de Senha" class="form-icon">
+            <input type="password" class="form-control" id="senhaAtual" name="senhaAtual" [(ngModel)]="senhaAtual" placeholder="Senha Atual">
+          </div>
+          <div class="form-field">
+            <img src="assets/icons/Lock.png" alt="Ícone de Senha" class="form-icon">
+            <input type="password" class="form-control" id="novaSenha" name="novaSenha" [(ngModel)]="novaSenha" placeholder="Nova Senha">
+          </div>
+          <div class="form-field">
+            <img src="assets/icons/Lock.png" alt="Ícone de Senha" class="form-icon">
+            <input type="password" class="form-control" id="confirmarNovaSenha" name="confirmarNovaSenha" [(ngModel)]="confirmarNovaSenha" placeholder="Confirmar Nova Senha">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button type="submit" form="form-alterar-senha" class="btn btn-primary">Salvar Senha</button>
+      </div>
+    </div>
+  </div>
 </div>

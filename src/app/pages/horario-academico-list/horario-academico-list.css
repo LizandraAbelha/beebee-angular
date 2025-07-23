@@ -8,6 +8,10 @@ html, body {
   font-family: 'Poppins', sans-serif;
 }
 
+.horario-info {
+  flex-grow: 1;
+  margin-bottom: 1rem;
+}
 .horario-list-container {
   display: flex;
   align-items: center;
@@ -33,6 +37,7 @@ html, body {
   justify-content: center;
   align-items: center;
   margin-bottom: 1.5rem;
+  text-align: center;
 }
 .header-title-group h2 {
   font-family: 'Baloo 2', cursive;
@@ -135,12 +140,13 @@ html, body {
   justify-content: space-between;
   align-items: center;
   background: #ffffff;
-  border: 1px solid #D1D1D1;
+  border: none;
   border-radius: 1rem;
   margin-bottom: 1rem;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  flex-wrap: wrap;
 }
 .list-group-item:hover {
   transform: translateY(-4px);

@@ -1,13 +1,20 @@
-.veiculo-list-container {
-  padding: 20px;
-  background-color: #ffffff;
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   min-height: 100vh;
-  width: 100vw;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 5;
+  width: 100%;
+  padding: 2rem 1rem;
   box-sizing: border-box;
+}
+
+.veiculo-list-container {
+  max-width: 900px;
+  width: 100%;
+  padding: 2rem 1.5rem;
+  background-color: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.07);
 }
 
 .header-section {
@@ -19,7 +26,7 @@
 .header-title-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
 .header-title-group img {
@@ -28,18 +35,18 @@
   object-fit: contain;
 }
 
-.add-vehicle-button-container {
-  text-align: right;
-  margin-top: 20px;
-  margin-bottom: 30px;
-}
-
 .header-section h2 {
   font-family: 'Baloo 2', cursive;
   font-size: 2rem;
   font-weight: normal;
   color: #111111;
   margin: 0;
+}
+
+.add-vehicle-button-container {
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 30px;
 }
 
 .btn-primary {
@@ -52,6 +59,7 @@
   border-radius: 2rem;
   transition: all 0.2s ease-in-out;
   pointer-events: auto;
+  text-decoration: none;
 }
 
 .btn-primary:hover {

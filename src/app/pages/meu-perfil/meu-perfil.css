@@ -294,3 +294,43 @@ hr {
 }
 .rating-value { font-weight: 600; color: #4a5568; }
 .text-muted { font-size: 0.9rem; color: #a0aec0; }
+
+.modal-content {
+  border-radius: 1rem;
+  border: none;
+}
+.modal-header {
+  border-bottom: 1px solid #f0f0f0;
+}
+.modal-title {
+  font-family: 'Baloo 2', cursive;
+  font-weight: 700;
+}
+.modal-footer {
+  border-top: 1px solid #f0f0f0;
+}
+
+.modal-body .form-field {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+.modal-body .form-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+.modal-body .form-control {
+  border: 1px solid #D1D1D1;
+  border-radius: 2rem;
+  padding: 0.75rem 1.85rem 0.75rem 3.5rem;
+  height: 50px;
+  font-size: 14px;
+}
+.modal-body .form-control:focus {
+  border-color: #FEBE01;
+  box-shadow: 0 0 0 0.25rem rgba(254, 190, 1, 0.25);
+}

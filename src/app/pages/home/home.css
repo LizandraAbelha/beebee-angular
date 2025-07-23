@@ -312,3 +312,8 @@ input[type="text"][placeholder="dd/mm/aaaa"],
 input[type="date"] {
   padding-left: 1rem;
 }
+.alert-info {
+  color: #000000;
+  background-color: rgba(254, 190, 1, 0.4);
+  border-color:rgba(254, 190, 1, 0.4);
+}

@@ -11,8 +11,12 @@ html, body {
 
 .viagem-list-container {
   max-width: 900px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem 1.5rem;
+  background: #ffffff;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.07);
   pointer-events: auto;
 }
 
