@@ -29,10 +29,24 @@
   margin-top: 1rem;
 }
 
+.form-field {
+  position: relative;
+}
+
+.form-icon {
+  position: absolute;
+  left: 1.25rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  opacity: 0.6;
+}
+
 .form-control {
   border: 1px solid #D1D1D1;
   border-radius: 2rem;
-  padding: 0.75rem 1.85rem;
+  padding: 0.75rem 1.85rem 0.75rem 3.5rem;
   height: 50px;
   font-size: 14px;
 }
@@ -44,7 +58,7 @@
 
 .form-control:focus {
   border-color: #FEBE01;
-  box-shadow: 0 0 0 0.25rem rgba(254, 190, 1, 0.25); 
+  box-shadow: 0 0 0 0.25rem rgba(254, 190, 1, 0.25);
 }
 
 .btn-primary {
@@ -72,4 +86,14 @@
   color: #FEBE01;
   text-decoration: none;
   font-weight: bold;
+}
+
+.text-danger {
+  text-align: center;
+  display: block;
+}
+
+.form-field + .text-danger {
+    margin-top: -0.75rem;
+    margin-bottom: 1rem;
 }
