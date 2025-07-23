@@ -61,7 +61,6 @@ export class ViagemDetail implements OnInit {
     });
   }
 
-  // MÉTODO AJUSTADO
   iniciarViagem(): void {
     if (!this.viagem || !this.viagem.id) return;
     if (confirm('Tem a certeza que deseja iniciar a viagem?')) {
@@ -78,7 +77,6 @@ export class ViagemDetail implements OnInit {
     }
   }
 
-  // MÉTODO AJUSTADO
   encerrarViagem(): void {
     if (!this.viagem || !this.viagem.id) return;
     if (confirm('Tem a certeza de que deseja encerrar esta viagem para todos?')) {
@@ -96,7 +94,6 @@ export class ViagemDetail implements OnInit {
     }
   }
 
-  // MÉTODO AJUSTADO
   cancelarViagem(): void {
     if (!this.viagem || !this.viagem.id) return;
     if (confirm('Tem a certeza que deseja cancelar esta viagem? Esta ação não pode ser desfeita.')) {
@@ -114,7 +111,6 @@ export class ViagemDetail implements OnInit {
     }
   }
 
-  // ... O resto dos métodos (gerirPedido, solicitarParticipacao, etc.) permanecem iguais
   gerirPedido(pedido: ViagemAluno, novoStatus: 'CONFIRMADA' | 'RECUSADA' | 'FINALIZADA'): void {
     if (!this.viagem || !pedido.id) return;
     const pedidoAtualizado: ViagemAluno = { ...pedido, situacao: novoStatus };

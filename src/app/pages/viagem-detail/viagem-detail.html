@@ -32,18 +32,13 @@
                 </div>
               }
             </li>
+            @if (viagem.veiculoPlaca) {
+              <li class="list-group-item vehicle-section-header"><strong>Veículo</strong></li>
+              <li class="list-group-item"><strong>Modelo:</strong> {{ viagem.veiculoModelo }}</li>
+              <li class="list-group-item"><strong>Cor:</strong> {{ viagem.veiculoCor }}</li>
+              <li class="list-group-item"><strong>Placa:</strong> {{ viagem.veiculoPlaca }}</li>
+            }
           </ul>
-          @if (viagem.veiculoPlaca) {
-            <div class="card-body border-top">
-              <img src="assets/icons/beebee-car.png" alt="Ícone de Carro">
-              <h5 class="card-title">Veículo</h5>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>Modelo:</strong> {{ viagem.veiculoModelo }}</li>
-                <li class="list-group-item"><strong>Cor:</strong> {{ viagem.veiculoCor }}</li>
-                <li class="list-group-item"><strong>Placa:</strong> {{ viagem.veiculoPlaca }}</li>
-              </ul>
-            </div>
-          }
         </div>
 
         <div class="card-footer">

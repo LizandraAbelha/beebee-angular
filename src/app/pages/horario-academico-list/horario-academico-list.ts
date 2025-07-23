@@ -9,7 +9,7 @@ import { HorarioAcademico } from '../../models/horario-academico';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './horario-academico-list.html',
-   styleUrls: ['./horario-academico-list.css']
+  styleUrls: ['./horario-academico-list.css']
 })
 export class HorarioAcademicoList implements OnInit {
   horarios: HorarioAcademico[] = [];

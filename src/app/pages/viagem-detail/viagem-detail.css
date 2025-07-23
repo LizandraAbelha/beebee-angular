@@ -36,6 +36,7 @@ html, body {
   background-color: #ffffff;
   border-bottom: 1px solid #eee;
   padding: 1.5rem;
+  text-align: center;
 }
 
 .viagem-detail-wrapper .card-body {
@@ -43,15 +44,9 @@ html, body {
 }
 
 .viagem-detail-wrapper .card-footer {
-  background-color: #ffffff;
+  background-color: #f8f9fa;
   border-top: 1px solid #eee;
   padding: 1.5rem;
-}
-
-.header-title-group {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
 }
 
 .header-title-group h3 {
@@ -82,6 +77,7 @@ html, body {
 .viagem-detail-wrapper .card-text {
     font-size: 1rem;
     margin-bottom: 1.5rem;
+    text-align: center;
 }
 
 .viagem-detail-wrapper .list-group-item {
@@ -89,6 +85,14 @@ html, body {
   padding: 1rem 1.5rem;
   background-color: transparent;
   font-size: 1rem;
+  color: #333;
+}
+
+.vehicle-section-header {
+  padding-top: 1.5rem !important;
+  border-top: 1px solid #eee;
+  font-family: 'Baloo 2', cursive;
+  font-size: 1.2rem;
   color: #333;
 }
 
@@ -113,7 +117,6 @@ html, body {
   margin-left: 0.5rem;
   text-transform: uppercase;
 }
-
 .viagem-detail-wrapper .badge.bg-primary {
   background-color: #FEBE01 !important;
   color: #111111 !important;
@@ -215,6 +218,7 @@ html, body {
   gap: 1rem;
   margin-top: 1.5rem;
   padding-top: 1.5rem;
+  border-top: 1px solid #eee;
 }
 .viagem-detail-actions .btn {
   font-family: 'Poppins', sans-serif;
