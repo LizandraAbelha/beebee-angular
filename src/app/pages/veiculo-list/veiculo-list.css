@@ -75,7 +75,7 @@
   align-items: center;
   text-align: center;
   transition: transform 0.2s ease;
-    pointer-events: auto;
+  pointer-events: auto;
 }
 
 .veiculo-card:hover {
@@ -144,8 +144,8 @@
 }
 
 .btn-danger {
-  background-color: #dc3545;
-  border-color: #dc3545;
+  background-color: #DD1129;
+  border-color: #DD1129;
   color: #ffffff;
   font-weight: 500;
   font-family: 'Poppins', sans-serif;
@@ -153,7 +153,6 @@
   border-radius: 2rem;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-
 .btn-danger:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);

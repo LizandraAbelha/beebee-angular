@@ -1,6 +1,9 @@
 <div class="horario-form-container">
   <div class="horario-form-card">
-    <h2>{{ isEditMode ? 'Editar Disciplina' : 'Nova Disciplina' }}</h2>
+    <div class="form-header">
+      <img src="assets/images/logo (1).png" alt="Logo BeeBee" class="logo-img">
+      <h2>{{ isEditMode ? 'Editar Disciplina' : 'Nova Disciplina' }}</h2>
+    </div>
 
     <form (ngSubmit)="salvar()" #form="ngForm" novalidate>
       <div class="form-group">
@@ -12,7 +15,7 @@
           [(ngModel)]="horario.descricao"
           class="form-control"
           required
-          placeholder="Digite o nome da disciplina"
+          placeholder="Ex: Cálculo I"
           #descricao="ngModel"
         />
         <div class="error-msg" *ngIf="descricao.invalid && descricao.touched">
@@ -67,7 +70,7 @@
           type="text"
           [(ngModel)]="horario.situacao"
           class="form-control"
-          placeholder="Exemplo: Ativa, Cancelada"
+          placeholder="Ex: Ativa, Cancelada"
         />
       </div>
 
@@ -79,7 +82,7 @@
         >
           {{ isEditMode ? 'Atualizar' : 'Salvar' }}
         </button>
-        <a routerLink="/app/horarios" class="btn btn-secondary ms-2">Cancelar</a>
+        <a routerLink="/app/horarios" class="btn btn-cancelar">Cancelar</a>
       </div>
     </form>
   </div>
