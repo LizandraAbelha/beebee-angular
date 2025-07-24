@@ -22,26 +22,36 @@
               <span class="badge" [ngClass]="{
                 'status-finalizada': item.situacao === 'FINALIZADA',
                 'status-cancelada': item.situacao === 'CANCELADA' || item.situacao === 'RECUSADA'
-              }">{{ item.situacao }}
-              </span>
-              @if (item.situacao === 'FINALIZADA') {
-                <div class="historico-card-footer">
-                  @if (item.avaliacao && item.avaliacao.notaMotorista) {
-                    <div class="avaliacao-display">
-                      <small>Sua Avaliação</small>
-                      <app-bee-rating [rating]="item.avaliacao.notaMotorista"></app-bee-rating>
-                    </div>
-                  } @else {
-                    <button (click)="abrirModalAvaliacao(item, 'motorista')"
-                            class="btn-default">Avaliar Motorista</button> }
-                </div>
-              }
+              }">{{ item.situacao }}</span>
             </div>
           </div>
+
+          @if (item.situacao === 'FINALIZADA') {
+            <div class="historico-card-footer">
+              @if (item.avaliacao && item.avaliacao.notaMotorista) {
+                <div class="avaliacao-display">
+                  <small>Sua Avaliação</small>
+                  <app-bee-rating [rating]="item.avaliacao.notaMotorista"></app-bee-rating>
+
+
+                </div>
+              } @else {
+                <button (click)="abrirModalAvaliacao(item, 'motorista')"
+                        class="btn btn-avaliar">Avaliar Motorista</button>
+              }
+            </div>
+          }
         </div>
       }
     } @else {
-      }
+      <div class="header-title-group2">
+        <img src="assets/icons/Bumblebee.png" alt="Ícone de Caronista">
+        <h4 class="section-title">Como Passageiro</h4>
+      </div>
+      <div class="alert alert-info">
+        <p class="mb-0">Você ainda não participou de nenhuma viagem.</p>
+      </div>
+    }
 
     @if (isMotorista && historicoMotorista.length > 0) {
       <div class="header-title-group">
@@ -51,9 +61,21 @@
       @for (viagem of historicoMotorista; track viagem.id) {
         <div class="historico-card">
           <div class="historico-card-body">
+            <div class="card-details">
+              <h5 class="card-route">{{ viagem.origem }} → {{ viagem.destino }}</h5>
+              <p class="card-info">Início: {{ viagem.dataInicio | date:'dd/MM/yyyy HH:mm' }}</p>
+              @if (viagem.dataFim) {
+                <p class="card-info">Finalizada em: {{ viagem.dataFim | date:'dd/MM/yyyy HH:mm' }}</p>
+              }
+              <span class="badge" [ngClass]="{
+                'status-finalizada': viagem.situacao === 'FINALIZADA',
+                'status-cancelada': viagem.situacao === 'CANCELADA'
+              }">{{ viagem.situacao }}</span>
+            </div>
             </div>
           @if (viagem.situacao === 'FINALIZADA' && viagem.passageiros && viagem.passageiros.length > 0) {
-            <div class="historico-card-footer2"> <h6>Avalie os passageiros desta viagem:</h6>
+            <div class="historico-card-footer2">
+              <h6>Avalie os passageiros desta viagem:</h6>
               <ul class="passageiros-list">
                 @for (passageiro of viagem.passageiros; track passageiro.id) {
                   <li class="passageiro-item">
@@ -62,7 +84,8 @@
                       <app-bee-rating [rating]="passageiro.avaliacao.notaCaronista"></app-bee-rating>
                     } @else {
                       <button (click)="abrirModalAvaliacao(passageiro, 'passageiro')"
-                              class="btn-default">Avaliar</button> }
+                              class="btn btn-default">Avaliar</button>
+                    }
                   </li>
                 }
               </ul>
@@ -71,7 +94,14 @@
         </div>
       }
     } @else {
-      }
+      <div class="header-title-group2">
+        <img src="assets/icons/Bee.png" alt="Ícone de Caronista">
+        <h4 class="section-title">Como Motorista</h4>
+      </div>
+      <div class="alert alert-info">
+        <p class="mb-0">Você ainda não publicou nenhuma viagem.</p>
+      </div>
+    }
   </div>
 </div>
 
@@ -87,7 +117,7 @@
       <div class="modal-body">
         <form (ngSubmit)="salvarAvaliacao()" id="form-avaliacao">
           <div class="mb-3 text-center">
-            <label class="form-label d-block mb-2">Sua nota</label>
+            <label class="form-label">Sua nota</label>
             <div class="star-rating">
               @for (star of [5, 4, 3, 2, 1]; track star) {
                 <input type="radio" [id]="'star'+star" name="rating" [value]="star"
@@ -96,18 +126,18 @@
               }
             </div>
           </div>
+          <div class="mb-3">
+            <label for="comentario" class="form-label">Comentário (Opcional)</label>
 
-          <div class="form-field">
-            <img src="assets/icons/Mail.png" alt="Ícone de Comentário" class="form-icon">
             <textarea class="form-control" id="comentario" name="comentario"
                       [(ngModel)]="avaliacaoParaEnviar[roleAvaliacao === 'motorista' ? 'comentarioMotorista' : 'comentarioCaronista']"
-                      rows="4" maxlength="500" placeholder="Comentário (Opcional)"></textarea>
+                      rows="4" maxlength="500"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-        <button type="submit" form="form-avaliacao" class="btn btn-primary">Enviar</button>
+        <button type="submit" form="form-avaliacao" class="btn btn-primary">Enviar Avaliação</button>
       </div>
     </div>
   </div>

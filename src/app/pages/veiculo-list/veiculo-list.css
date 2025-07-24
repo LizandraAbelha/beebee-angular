@@ -1,203 +1,176 @@
-html, body {
-  background-color: #f8f9fa;
-  margin: 0;
-  padding: 0;
-  height: 100%;
+.page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
-  font-family: 'Poppins', sans-serif;
+  padding: 2rem 1rem;
+  box-sizing: border-box;
 }
 
-.viagem-list-container {
+.veiculo-list-container {
   max-width: 900px;
   width: 100%;
-  margin: 0 auto;
   padding: 2rem 1.5rem;
-  background: #ffffff;
+  background-color: #ffffff;
   border-radius: 1rem;
   box-shadow: 0 8px 25px rgba(0,0,0,0.07);
-  pointer-events: auto;
+
 }
 
 .header-section {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 30px;
+}
+.header-title-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-title-group img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .header-section h2 {
-  font-family: 'Baloo 2', cursive;
-  font-size: 2rem;
-  font-weight: normal;
-  color: #111111;
   margin: 0;
 }
 
-.btn-oferecer-carona {
+.add-vehicle-button-container {
+  text-align: right;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.btn-primary {
   background-color: #FEBE01;
-  color: #111111;
-  font-family: 'Baloo 2', cursive;
+  border-color: #FEBE01;
+  color: #000000;
   font-weight: 600;
-  font-size: 1rem;
-  border: none;
-  border-radius: 50px;
+  font-family: 'Baloo 2', cursive;
   padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  transition: all 0.2s ease-in-out;
+  pointer-events: auto;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(254, 190, 1, 0.4);
+}
+
+.veiculos-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.veiculo-card {
+  background-color: #ffffff;
+
+  border-radius: 1rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  transition: transform 0.2s ease;
+  pointer-events: auto;
+}
+
+.veiculo-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.card-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  text-decoration: none;
-  transition: all 0.3s ease;
+  justify-content: center;
 }
 
-.btn-oferecer-carona:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(254, 190, 1, 0.5);
+.card-icon img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.search-card {
-  background: #ffffff;
-  padding: 1.5rem 2rem;
-  border-radius: 1rem;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-  margin-bottom: 2.5rem;
+.card-details {
+  margin-bottom: 20px;
+  flex-grow: 1;
 }
 
-.search-card .form-label {
-  font-weight: 500;
-  font-size: 0.9rem;
-  color: #4a5568;
-}
-
-.search-card .form-control {
-  border-radius: 0.5rem;
-  border: 1px solid #e2e8f0;
-}
-.search-card .form-control:focus {
-  border-color: #FEBE01;
-  box-shadow: 0 0 0 3px rgba(254, 190, 1, 0.2);
-}
-
-.btn-procurar, .btn-limpar {
-  width: 100%;
-  padding: 0.6rem;
+.vehicle-model {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.2rem;
   font-weight: 600;
-  border-radius: 2rem;
+  color: #333333;
+  margin-bottom: 5px;
 }
 
-.btn-procurar {
-  background-color: #FEBE01;
-  color: white;
-  border: none;
-}
-.btn-procurar:hover {
-  background-color: #FEBE01;
-  border-color: #FEBE01;
-  transform: translateY(-1px);
-  box-shadow: 0 4px 10px rgba(254, 190, 1, 0.3);
+.vehicle-plate {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #666666;
+  margin: 0;
 }
 
-.btn-limpar {
+.card-actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  width: 100%;
+}
+
+.btn-secondary {
   background-color: #f0f0f0;
   color: #333;
+  border: none;
   border-radius: 2rem;
   padding: 0.5rem 1rem;
   font-weight: 500;
   text-decoration: none;
   font-size: 0.9rem;
   display: inline-block;
-  transition: background-color 0.2s ease;
+  transition: all 0.2s ease;
+  cursor: pointer;
 }
-.btn-limpar:hover {
+.btn-secondary:hover {
   background-color: #5a6268;
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(108, 117, 125, 0.3);
   color: #ffffff;
 }
 
-.viagem-cards-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
+.btn-danger {
+  background-color: #DD1129;
+  border-color: #DD1129;
+  color: #ffffff;
+  font-weight: 500;
+  font-family: 'Poppins', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+.btn-danger:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
 
-.viagem-card {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  background: #ffffff;
-  padding: 1.25rem;
-  border-radius: 1rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  text-decoration: none;
-  color: inherit;
+.alert-info.empty-state {
+  text-align: center;
+  padding: 20px;
+  border-radius: 0.75rem;
+  background-color: #e9f7fe;
+  color: #0c5460;
+  border-color: #bee5eb;
 }
-
-.viagem-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-}
-
-.viagem-card-icon {
-  background-color: #f0f4f8;
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.viagem-card-icon img {
-  width: 28px;
-  height: auto;
-}
-
-.viagem-card-details {
-  flex-grow: 1;
-}
-
-.viagem-card-route {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #2d3748;
-  margin: 0 0 0.25rem 0;
-}
-
-.viagem-card-driver {
-  font-size: 0.9rem;
-  color: #718096;
-  margin: 0;
-}
-
-.viagem-card-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.viagem-card-date {
-  font-size: 0.9rem;
-  color: #4a5568;
-}
-
-.viagem-card-time {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #2d3748;
-}
-
-.badge {
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.4em 0.8em;
-  border-radius: 50px;
-  margin-top: 0.5rem;
-  text-transform: uppercase;
-}
-
-.bg-planejada { background-color: #e0e7ff; color: #3730a3; }
-.bg-andamento { background-color: #d1fae5; color: #047857; }
